@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_title_img"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/_5sdp"
+
+            android:scaleType="fitXY" />
+
+
+        <LinearLayout
+            android:id="@+id/lvtxtbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btndonateus"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/iv_title_img"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/pop_semibold"
+                android:singleLine="true"
+                android:text="Title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pop_regular"
+                android:text="Subtitle"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/pop_regular" />
+
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btndonateus"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/btn_layout"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:fontFamily="@font/pop_semibold"
+            android:layout_toRightOf="@+id/iv_title_img"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/Donation_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

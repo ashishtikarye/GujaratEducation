@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bgi">
+
+
+    <LinearLayout
+        android:id="@+id/lvtop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivlogosplash"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@drawable/logomap" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/pop_semibold"
+                android:text="OTP Verification"
+                android:textSize="@dimen/_22sdp" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_reg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:fontFamily="@font/pop_semibold"
+                android:gravity="center"
+                android:text="Please type the verification code sent via SMS"
+                android:textColor="@color/login_create_acc_text"
+                android:textSize="@dimen/_16sdp" />
+
+
+            <LinearLayout
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/login_image_bg" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edotpverify"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:background="#00000000"
+                        android:digits="0123456789"
+                        android:fontFamily="@font/pop_bold"
+                        android:hint="Enter OTP"
+                        android:inputType="phone"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:textAlignment="center"
+                        android:textColor="@color/login_edit_text"
+                        android:textColorHint="@color/login_edit_text"
+                        android:textCursorDrawable="@drawable/cursor_black"
+                        android:textSize="@dimen/_16sdp" />
+
+                </LinearLayout>
+
+                <include
+                    layout="@layout/login_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/shape_grey_curve_fill"
+                android:fontFamily="@font/pop_semibold"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="V E R I F Y"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

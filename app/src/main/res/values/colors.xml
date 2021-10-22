@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryLight">#56F3F0</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#008000</color>-->
+
+    <color name="colorPrimary">#42D5D3</color>
+    <color name="colorPrimaryLight">#56F3F0</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryDark">#2D8787</color>
+    <color name="cl_en">#ffcece</color>
+    <color name="cl_hi">#ffffcc</color>
+    <color name="bg_theme">#f8f1df</color>
+    <color name="grey_text2">#3A3A3A</color>
+    <color name="black_transparent_order">#960a0a0a</color>
+    <color name="app_color">#374B94</color>
+    <color name="white">#FFFFFF</color>
+    <color name="availclassbg">#D1B053</color>
+    <color name="profileback">#f8f1df</color>
+    <color name="blue">#304982</color>
+    <color name="fbblue">#304a7d</color>
+    <color name="gplusred">#f32e06</color>
+    <color name="black">#000000</color>
+    <color name="lightgreen">#A5F3A5</color>
+    <color name="orange">#ffa72b</color>
+    <color name="divider">#B2B2B2</color>
+    <color name="hint">#7f7f7f</color>
+    <color name="bluedark">#0031d2</color>
+    <color name="silver">#EEEEEC</color>
+    <color name="bg">#FFFFFF</color>
+    <color name="bgmain">#F8F1DF</color>
+    <color name="reblue">#003581</color>
+    <color name="litblue">#7D3CC5</color>
+    <color name="green">#17b500</color>
+    <color name="darkYellow">#F2B439</color>
+    <color name="grey2">#F2F2F2</color>
+
+    <color name="divider1">#c5c5c5</color>
+    <color name="divider2">#DFDEDE</color>
+    <color name="grey_text">#515151</color>
+
+    <color name="notification_badge_green">#008000</color>
+    <color name="app_bg">#F9F9F9</color>
+    <color name="drawer_bg">#FFFFFF</color>
+    <color name="card_view_white">#ffffff</color>
+    <color name="card_view_white_light">#F9F9F9</color>
+    <color name="toolbar_text">#424242</color>
+    <color name="card_view_red">#EC0000</color>
+
+    <color name="navigation_default">#424242</color>
+    <color name="navigation_checked">#008000</color>
+    <color name="navigation_item_bg_checked">#F1EFF1</color>
+    <color name="navigation_item_bg_default">#00000000</color>
+
+    <color name="intro_skip_bg">#2B36B3</color>
+    <color name="intro_skip_text">#FFFFFF</color>
+    <color name="intro_next_bg">#008000</color>
+    <color name="fill_circle">#008000</color>
+    <color name="circle">#898989</color>
+    <color name="intro_title">#424242</color>
+    <color name="intro_sub_title">#737373</color>
+
+    <color name="header_title">#424242</color>
+    <color name="no_conference_text">#323232</color>
+    <color name="shadow_bg">#F9F9F9</color>
+
+    <color name="his_join_text">#FFFFFF</color>
+    <color name="his_join_btn_text">#FFFFFF</color>
+    <color name="his_join_bg">#008000</color>
+
+    <color name="his_id_text">#032F4A</color>
+    <color name="his_date_text">#293b46</color>
+    <color name="his_time_text">#EC0000</color>
+
+    <color name="live_name_text">#032f4a</color>
+    <color name="live_meet_text">#578cac</color>
+
+    <color name="dialog_create_header_bg">#008000</color>
+    <color name="dialog_edit_text">#7F7F7F</color>
+    <color name="dialog_toggle_bg">#008000</color>
+    <color name="dialog_toggle_text">#7F7F7F</color>
+    <color name="dialog_line">#D0D0D0</color>
+    <color name="dialog_copy_bg">#424242</color>
+    <color name="dialog_conf_text">#7F7F7F</color>
+    <color name="dialog_conf_edit_bg">#FFFFFF</color>
+    <color name="dialog_conf_card_bg">#D9D9D9</color>
+
+    <color name="picker_bg">#008000</color>
+    <color name="create_img_bg">#008000</color>
+
+    <color name="create_border_bg1">#ec008c </color>
+    <color name="create_border_bg2">#fc6767</color>
+    <color name="meeting_border_bg1">#2b35b3 </color>
+    <color name="meeting_border_bg2">#1486cb</color>
+    <color name="create_box_text">#ffffff</color>
+    <color name="meeting_box_text">#ffffff</color>
+
+    <color name="home_title_text">#032F4A</color>
+    <color name="home_title_line">#032F4A</color>
+    <color name="home_view_all">#008000</color>
+
+    <color name="image_border_bg">#F9F9F9</color>
+    <color name="image_border_shadow">#E4E4E4</color>
+
+    <color name="dialog_color">#008000</color>
+    <color name="dialog_text">#3a3a3a</color>
+    <color name="dialog_white_text">#FFFFFF</color>
+
+    <color name="forgot_title">#424242</color>
+    <color name="forgot_sub_title">#959393</color>
+    <color name="forgot_mail_img">#424242</color>
+    <color name="forgot_edit_text">#424242</color>
+    <color name="input_box_line">#959393</color>
+    <color name="forgot_btn_text">#ffffff</color>
+    <color name="forgot_btn_bg">#008000</color>
+
+    <color name="login_title_text">#424242</color>
+    <color name="login_sub_title_text">#8A8989</color>
+    <color name="login_image_bg">#424242</color>
+    <color name="login_image_btn_bg">#FFFFFF</color>
+    <color name="login_edit_text">#424242</color>
+    <color name="login_input_box_line">#959393</color>
+    <color name="check_box_bg">#008000</color>
+    <color name="login_forgot_text">#424242</color>
+    <color name="login_create_acc_text">#424242</color>
+    <color name="login_sign_up_text">#008000</color>
+    <color name="login_line">#008000</color>
+    <color name="login_btn_text">#ffffff</color>
+    <color name="login_btn_bg">#008000</color>
+    <color name="login_btn_fb_bg">#3C66C4</color>
+    <color name="login_btn_gm_bg">#CF4332</color>
+    <color name="skip_btn_bg">#FF7101</color>
+    <color name="swipe_bg">#008000</color>
+
+    <color name="select_dot">#FF7101</color>
+    <color name="non_select_dot">#6a6a6a</color>
+
+    <color name="profile_line">#D2D2D4</color>
+    <color name="profile_title">#424242</color>
+    <color name="profile_sub">#9D9D9D</color>
+
+    <color name="cursor_black">#000000</color>
+    <color name="cursor_black_dia">#000000</color>
+    <color name="cursor_white">#ffffff</color>
+
+    <color name="about_title">#404040</color>
+    <color name="about_text">#8D8D8D</color>
+    <color name="about_image">#8D8D8D</color>
+
+    <color name="setting_line">#ECECEC</color>
+    <color name="setting_title">#4D4F54</color>
+    <color name="switch_activated">#008000</color>
+    <color name="switch_normal">#3a3a3a</color>
+
+    <color name="dialog_text_exit">#3a3a3a</color>
+    <color name="dialog_text_button">#3a3a3a</color>
+
+    <color name="gujarati">#88bc02</color>
+    <color name="marathi">#a123cd</color>
+    <color name="urdu">#88bc02</color>
+    <color name="english">#52abe5</color>
+    <color name="hindi">#e8bf17</color>
+    <color name="telugu">#52abe5</color>
+    <color name="odiya">#d44645</color>
+
+    <color name="ratefillcolor">#fcbf7a</color>
+    <color name="transparent">#00000000</color>
+    <color name="bottomsheet_title_bg">#6c7a89</color>
+
+
+
+ </resources>

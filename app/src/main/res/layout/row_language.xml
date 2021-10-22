@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlv_language"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_65sdp"
+    android:background="@drawable/shape_gujarati"
+    android:clickable="true"
+    android:layout_marginTop="@dimen/_5sdp"
+    >
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvlanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:clickable="false"
+        android:fontFamily="@font/pop_medium"
+        android:text="@string/gujarati_lang"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20sdp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivlanguage"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:clickable="false"
+        android:src="@drawable/lang_gujarati"></androidx.appcompat.widget.AppCompatImageView>
+
+</RelativeLayout>

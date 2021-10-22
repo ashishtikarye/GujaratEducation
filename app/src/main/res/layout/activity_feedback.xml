@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/headerTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/colorPrimary"
+        android:gravity="left"
+        android:paddingLeft="@dimen/_15sdp"
+        android:paddingRight="@dimen/_15sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivback"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_back" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_title"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/menu_feedback"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            tools:ignore="MissingPrefix" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lvfeedbackcategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fdcatetitle"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:text="Feedback Category"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+            tools:ignore="MissingPrefix" />
+
+        <RelativeLayout
+            android:id="@+id/rlvspinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:clickable="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvselectcategory"
+                android:fontFamily="@font/pop_bold"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_toLeftOf="@+id/sp"
+                android:clickable="false"
+                android:gravity="center_vertical"
+                android:hint="Tap to Select Category"
+                android:textColor="@color/grey_text"
+                android:textSize="@dimen/_12sdp"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/sp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:clickable="false"
+                android:src="@drawable/ic_spinner" />
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etfullname"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:singleLine="true"
+            android:textColor="@color/grey_text"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="MissingPrefix" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etschoolname"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:singleLine="true"
+            android:textColor="@color/grey_text"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="MissingPrefix" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etemailid"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:gravity="center_vertical"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:singleLine="true"
+            android:textColor="@color/grey_text"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="MissingPrefix" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etmobilno"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:gravity="center_vertical"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:singleLine="true"
+            android:textColor="@color/grey_text"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="MissingPrefix" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etfeedback"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:background="@drawable/xml_square_border_lowradius"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:minLines="1"
+            android:padding="@dimen/_5sdp"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:textColor="@color/grey_text"
+            android:textSize="@dimen/_12sdp"
+            tools:ignore="MissingPrefix" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:numStars="5"
+             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            fontPath="Quicksand-Bold.ttf"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/xml_tab_pressed"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            tools:ignore="MissingPrefix" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="shadow_size">60dp</dimen>
+    <dimen name="enchanted_view_pager_margin">0dp</dimen>
+</resources>

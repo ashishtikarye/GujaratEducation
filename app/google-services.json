@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "218347891919",
+    "project_id": "appgujedu-1620978749531",
+    "storage_bucket": "appgujedu-1620978749531.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218347891919:android:0bb7b18b339dff1f51dbba",
+        "android_client_info": {
+          "package_name": "com.gujeducation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218347891919-6s1nf0c75cmavsv52hu8plt5235lu45r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gujeducation",
+            "certificate_hash": "d344c12d665be2b7f26d2e33a4915ceed5e627a0"
+          }
+        },
+        {
+          "client_id": "218347891919-apg7h25tscno7432oanrda0nfutv7qar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gujeducation",
+            "certificate_hash": "5395733c88238d3c4cf980482e01c01e4c033bef"
+          }
+        },
+        {
+          "client_id": "218347891919-qe553kjga0delee1l320bu61ce6us9b5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gujeducation",
+            "certificate_hash": "9d4dd3b200fe125c65b0854c8ddfb4b454eb9e8c"
+          }
+        },
+        {
+          "client_id": "218347891919-sngdrelee4tjhi8uub9d89pm3ijo3tgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBipJqCQVIZld8ragzKNesax7ibyu2ECjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218347891919-k8ooqpargc1l83m38qedmk3fb51b4prv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

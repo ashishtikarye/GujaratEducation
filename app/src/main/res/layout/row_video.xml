@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_3sdp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+
+    <RelativeLayout
+        android:id="@+id/rlviv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_thumbnail"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:scaleType="fitCenter" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/iv_play"
+            android:layout_toRightOf="@+id/iv_thumbnail">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_videotitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/pop_semibold"
+                android:singleLine="true"
+                android:text="Video Title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_made_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_videotitle"
+                android:ellipsize="end"
+                android:fontFamily="@font/pop_regular"
+                android:singleLine="true"
+                android:text="Made By"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/pop_regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_made_by"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Credit"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                app:fontFamily="@font/pop_regular" />
+
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_play"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:src="@drawable/ic_play_m" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

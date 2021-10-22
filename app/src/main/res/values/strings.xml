@@ -1,0 +1,157 @@
+<resources>
+    <string name="app_name">GujaratEducation</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+    <!-- AdMob ad unit IDs -->
+    <string name="banner_home_footer">ca-app-pub-4992146571652437/8044459369</string>
+    <string name="apptitle">GUJARAT EDUCATION</string>
+
+    <string name="selectlanguage">SELECT YOUR LANGUAGE</string>
+    <string name="gujarati_lang">ગુજરાતી</string>
+    <string name="english_lang">English</string>
+    <string name="hindi_lang">हिंदी</string>
+    <string name="marathi_lang">मराठी</string>
+    <string name="odiya_lang">ଓଡ଼ିଆ</string>
+    <string name="telugu_lang">తెలుగు</string>
+    <string name="urdu_lang">اردو۔</string>
+
+    <string name="test_interstitial_normal">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="test_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_small">ca-app-pub-6923797063551368/8131046669</string>
+    <string name="banner_big">ca-app-pub-4992146571652437/4637908610</string>
+    <string name="interstitial_normal">ca-app-pub-6923797063551368/3272831029</string>
+
+
+    <string name="please_enter_email">Please enter registered email</string>
+    <string name="send">Send</string>
+    <string name="menu_share">Share</string>
+    <string name="home_availableclass">Available Class</string>
+    <string name="logincontinue">Login to continue as Teacher or Student</string>
+    <string name="emailid">Email id</string>
+    <string name="login_password">Password</string>
+    <string name="forgetpassword">Forget Password</string>
+    <string name="login">Login</string>
+    <string name="continuewith">Or Continue With</string>
+    <string name="google">G O O G L E</string>
+    <string name="no_account">Don\'t Have an Account</string>
+    <string name="create_account">Create Account</string>
+    <string name="fullname">Full Name</string>
+    <string name="emailid_1">Email id</string>
+    <string name="login_password_1">Password</string>
+    <string name="mobileno">Mobile No</string>
+    <string name="sellect_role">Select Role</string>
+    <string name="teacher">Teacher</string>
+    <string name="student">Student</string>
+    <string name="schoolname">School Name</string>
+    <string name="taluka">Tal</string>
+    <string name="distict">Dist</string>
+    <string name="termsandconditions">I agree with Your Terms and Conditions</string>
+    <string name="register">Sign Up</string>
+
+    <string name="profile_hi_title">Hello, "</string>
+    <string name="update_available">New Update Available</string>
+
+    <string name="myaccount">My Account</string>
+    <string name="menu_mygroups">My Groups</string>
+    <string name="donation">Support</string>
+    <string name="menu_minami_duniya">Minami Duniya</string>
+    <!--<string name="menu_evalution">Evalution</string> -->
+    <string name="creditors">Creditors</string>
+    <string name="aboutus">About Us</string>
+    <string name="menu_shareapp">Share App</string>
+    <string name="menu_feedback">Feedback</string>
+    <string name="menu_term_conditions">Terms and Conditions</string>
+    <string name="menu_notification">Notification</string>
+    <string name="menu_logout">Logout</string>
+    <string name="select_category">Select Category</string>
+    <string name="fdcategory">Feedback Category</string>
+    <string name="btn_view">View</string>
+
+    <string name="available_all_class">Available All Class</string>
+    <string name="guj_state_only">(Gujarat state only)</string>
+    <string name="home_live_class">Live Class / Conference</string>
+    <string name="home_educationalcorner">Educational Corner</string>
+    <string name="home_compititive_exams">Competitive Exams</string>
+    <string name="home_newsandcircular">News and Circular</string>
+    <string name="home_daysspecial">Days Special</string>
+    <string name="home_links">Important Links</string>
+    <string name="home_magazines">Magazines</string>
+    <string name="home_calender">Calender</string>
+
+    <string name="primary">Primary</string>
+    <string name="pre_primary">Pre Primary</string>
+    <string name="early_education">Early Education</string>
+    <string name="high_primary">Higher Primary</string>
+    <string name="secondary">Secondary</string>
+    <string name="high_secondary">Higher Secondary</string>
+
+    <string name="_class">Class</string>
+    <string name="nursery">Nursery</string>
+    <string name="junior_kg">Junior Kg</string>
+    <string name="senior_kg">Senior Kg</string>
+    <string name="class_1">1</string>
+    <string name="class_2">2</string>
+    <string name="class_3">3</string>
+    <string name="class_4">4</string>
+    <string name="class_5">5</string>
+    <string name="class_6">6</string>
+    <string name="class_7">7</string>
+    <string name="class_8">8</string>
+    <string name="class_9">9</string>
+    <string name="class_10">10</string>
+    <string name="class_11">11</string>
+    <string name="class_12">12</string>
+
+    <string name="view">View</string>
+    <string name="yearly">Yearly</string>
+    <string name="semester">Semester</string>
+    <string name="Pri_primary_quize">START QUIZ</string>
+
+    <string name="subject">Subject</string>
+    <string name="textbook">Text Book</string>
+    <string name="blueprint">Blueprint</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="studyconclusion">Learning Outcomes</string>
+    <string name="teacheraddition">Teacher Edition</string>
+    <string name="videos">Videos</string>
+    <string name="exercise">exercise</string>
+    <string name="Worksheet_chaptr">Worksheet</string>
+    <string name="Worksheet_semester">Worksheet</string>
+    <string name="old_papers">Old Papers</string>
+    <string name="essay">Essay</string>
+    <string name="quiz">MCQ\'s</string>
+    <string name="result">Result</string>
+    <string name="select_option">Select Option</string>
+    <string name="more_info">MORE INFO</string>
+
+    <string name="Com_exam_paper_name">Paper Name</string>
+    <string name="Com_exam_subject_name">Select Subject Name</string>
+    <string name="Com_exam_chapter_options">Select Chapter Options</string>
+    <string name="Com_exam_information">Information</string>
+    <string name="Com_exam_chapter">Chapter</string>
+    <string name="Com_exam_details">Details</string>
+    <string name="Com_exam_subject">Subject</string>
+    <string name="Com_exam_textbook">TextBook</string>
+    <string name="Com_exam_blueprint">Blueprint</string>
+    <string name="Com_exam_syllabus">Syllabus</string>
+    <string name="Com_exam_videos">Videos</string>
+    <string name="Com_exam_Worksheet_chaptr">Worksheet</string>
+    <string name="Com_exam_Worksheet_suject">Worksheet</string>
+    <string name="Com_exam_old_papers">Old Paper\'s</string>
+
+    <string name="Donation_btn">Support us</string>
+
+    <string name="news_see_btn">View</string>
+    <string name="news_share_btn">Share</string>
+
+    <string name="magazines_see_btn">View</string>
+    <string name="magazines_share_btn">Share</string>
+
+    <string name="calender_see_btn">View</string>
+    <string name="calender_share_btn">Share</string>
+
+    <string name="daysspecial_see_btn">View</string>
+    <string name="daysspecial_share_btn">Share</string>
+
+
+</resources>

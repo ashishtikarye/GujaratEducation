@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_3sdp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_5sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_magazine_img"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:layout_alignParentLeft="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_magazine_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv_magazine_img"
+            android:fontFamily="@font/pop_semibold"
+            android:text="Name"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_magazine_made_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_magazine_name"
+            android:layout_toRightOf="@id/iv_magazine_img"
+            android:fontFamily="@font/pop_regular"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="Made By"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"
+            app:fontFamily="@font/pop_regular" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_creditlicence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_magazine_made_by"
+            android:layout_toRightOf="@id/iv_magazine_img"
+            android:text="Credit"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            app:fontFamily="@font/pop_regular" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:layout_toRightOf="@+id/iv_magazine_img"
+            android:layout_below="@+id/tv_creditlicence">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnmonth"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/btn_layout"
+                android:fontFamily="@font/pop_semibold"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/daysspecial_see_btn"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnsee"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/btn_layout"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:fontFamily="@font/pop_semibold"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/daysspecial_see_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnshare"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/btn_layout"
+                android:fontFamily="@font/pop_semibold"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/daysspecial_share_btn"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

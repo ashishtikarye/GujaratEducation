@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gujeducation">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".gujaratedu.Application.AppController"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".gujaratedu.Activity.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".gujaratedu.Activity.HomeScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.GetAllContacts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.LanguageScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SignInScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.ForgetPassswordScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SignUpScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.ClassScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.DaysSpecialScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.AvailableClassScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.CompititiveExamScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.NewsCircularScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.ImportantLinksScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.MyNotification"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.VerifyOTPScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.EvalutionScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.AboutUsScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.CreditorsScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.FeedbackScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.TermsConditionScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.MyAccountScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.MinamiDuniaScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.DonationScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.GroupScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.ChapterScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.PdfScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.TestScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.ResultScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.MagazineScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.MagazineEditionScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.CalenderEditionScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.PaperExamListDetailsScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.VideoListScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.VideoListChapterScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SubjectOldPaperListScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.EssayListScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.EssayDescription"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.VideoScreen"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|uiMode"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".gujaratedu.Activity.DaysSpecialDescription"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.PaperListScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.QuizScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SubjectListScreenCompExam"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SubjectDetailsListScreenCompExam"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.OldPaperListScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.EducationCornerScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.CreatePostScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.SubLinkScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.PrePrimaryTextScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".gujaratedu.Activity.CalenderScreen"
+            android:screenOrientation="portrait" />
+        <!-- /* FCM Reciever*/ -->
+        <!--<service
+            android:name=".gujaratedu.Firebase.MyFirebaseInstance"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>-->
+        <service
+            android:name=".gujaratedu.Firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service> <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6923797063551368~8002413529" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+
+        <meta-data
+            android:name="com.onesignal.NotificationAccentColor.DEFAULT"
+            android:value="FF008000" />
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
+        <meta-data
+            android:name="firebase_crash_collection_enabled"
+            android:value="false" />
+
+        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_like" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+    </application>
+
+</manifest>

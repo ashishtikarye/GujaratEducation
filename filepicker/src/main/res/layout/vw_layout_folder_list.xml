@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vincent.filepicker.MaxHeightLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mhl_folder"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/vw_bg_folder_list"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingBottom="@dimen/_5sdp"
+    app:mhl_HeightDimen="@dimen/_190sdp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingRight="@dimen/_5sdp"
+        android:scrollbars="vertical"
+        android:scrollbarSize="@dimen/_3sdp"
+        android:scrollbarStyle="outsideOverlay"/>
+
+</com.vincent.filepicker.MaxHeightLayout>

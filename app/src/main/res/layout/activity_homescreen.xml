@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgmain"
+    android:orientation="vertical">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/adView"
+        android:background="@color/bgmain"
+        android:layoutDirection="ltr"
+        android:textDirection="ltr">
+
+        <RelativeLayout
+            android:id="@+id/home_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/adView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/headerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="left"
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:paddingRight="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivmenu_drawer"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_drawer" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivheader_logo"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="@dimen/_30sdp"
+                        android:layout_toRightOf="@+id/ivmenu_drawer"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/logomap" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/header_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@+id/ivheader_logo"
+                        android:fontFamily="@font/pop_bold"
+                        android:text="@string/apptitle"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                         />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivlanguage_change"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_language" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white">
+
+
+                    <androidx.core.widget.NestedScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <FrameLayout
+                                android:id="@+id/sliderfrmlay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible">
+
+
+                                <com.gujeducation.gujaratedu.Helper.WrapContentHeightViewPager
+                                    android:id="@+id/pager"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:background="@color/white" />
+
+                                <com.gujeducation.gujaratedu.Viewpagerindicator.CirclePageIndicator
+                                    android:id="@+id/indicator"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:padding="10dip"
+                                    app:centered="true"
+                                    app:pageColor="@color/green"
+                                    app:snap="true"
+                                    app:strokeColor="@color/green"
+                                    app:strokeWidth="0dp" />
+
+                            </FrameLayout>
+
+
+                        </LinearLayout>
+                    </androidx.core.widget.NestedScrollView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btn_availableclass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@color/colorPrimaryDark">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_avalableclass_main"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:clickable="false"
+                        android:src="@drawable/ic_presentation" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_availableclass_aerow"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:clickable="false"
+                        android:src="@drawable/ic_right_direction" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="false"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/iv_availableclass_text1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:fontFamily="@font/pop_bold"
+                            android:text="@string/available_all_class"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_13sdp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_availableclass_text2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:fontFamily="@font/pop_semibold"
+                            android:gravity="center"
+                            android:text="@string/guj_state_only"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_live_class"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lv_liveclass"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/iv_liveclass"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_live_class" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lv_liveclass"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_live_class"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_eduucation_corner"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lveducationalcorner"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_green"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/iveducationalcorner"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_educational_corner" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lveducationalcorner"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_educationalcorner"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_compt_exams"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lvcompexams"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_yellow"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/ivcompexams"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_compititive_exams" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lvcompexams"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_compititive_exams"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_news_circular"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lvnewscircular"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_orange"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/ivnewscircular"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_newsandcircular" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lvnewscircular"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_newsandcircular"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_days_special"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lvdaysspeical"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/ivdaysspecial"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_days_special" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lvdaysspeical"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_daysspecial"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_important_links"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lv_important_links"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_green"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/iv_important_links"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_links" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lv_important_links"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_links"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_magazines"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lvmagazines"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_yellow"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/ivmagazines"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_magazine" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lvmagazines"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_magazines"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card_calender"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <LinearLayout
+                                        android:id="@+id/lvcalender"
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="match_parent"
+                                        android:layout_alignParentLeft="true"
+                                        android:background="@drawable/shape_left_fill_orange"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <androidx.appcompat.widget.AppCompatImageView
+                                            android:id="@+id/ivcalender"
+                                            android:layout_width="@dimen/_28sdp"
+                                            android:layout_height="@dimen/_28sdp"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/ic_calendar" />
+                                    </LinearLayout>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="@dimen/_5sdp"
+                                        android:layout_toRightOf="@+id/lvcalender"
+                                        android:fontFamily="@font/pop_medium"
+                                        android:text="@string/home_calender"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_11sdp" />
+                                </RelativeLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- Left Drawer -->
+        <RelativeLayout
+            android:id="@+id/whatYouWantInLeftDrawer"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_above="@id/adView"
+            android:layout_gravity="left"
+            android:background="@color/silver">
+
+            <LinearLayout
+                android:id="@+id/home_left_menu_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/leftmenu_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivuserprof"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:adjustViewBounds="true"
+                        android:visibility="invisible"
+                        android:src="@drawable/ico_profile_user" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/pop_bold"
+                            android:text="Hi"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@color/divider1"></View>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true"
+                    android:scrollbars="none">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/drwermenu"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:gravity="left"
+                            android:orientation="vertical"
+                            android:scrollbars="none">
+
+
+                            <LinearLayout
+                                android:id="@+id/llmyaccount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/ic_my_account" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/myaccount"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llGroupEducation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:clickable="true"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/menu_boardmember" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="My Group"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llDonation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/ic_donation" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/donation"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llMinamiduniya"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/ic_meena_ni_duniya" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_minami_duniya"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llCreditmember"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/ic_creditors" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/creditors"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_aboutus"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:clickable="false"
+                                    android:src="@drawable/ic_about_us" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:clickable="false"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/aboutus"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llShare"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_26sdp"
+                                    android:layout_height="@dimen/_26sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:src="@drawable/ic_share" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_shareapp"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llFeedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:src="@drawable/ic_feedback" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_feedback"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/lltermscondition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:src="@drawable/ic_terms" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_term_conditions"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/llnotification"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/silver"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:src="@drawable/ic_notification" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_notification"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/llLogout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:clickable="true"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_22sdp"
+                                    android:layout_height="@dimen/_22sdp"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:src="@drawable/ic_logout" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="@dimen/_10sdp"
+                                    android:fontFamily="@font/pop_regular"
+                                    android:text="@string/menu_logout"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_15sdp"  />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:text="v1.4"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+                    </RelativeLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/test_banner"></com.google.android.gms.ads.AdView>
+</RelativeLayout>

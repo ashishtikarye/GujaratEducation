@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GujaratEducation</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+    <!-- AdMob ad unit IDs -->
+    <string name="banner_home_footer">ca-app-pub-4992146571652437/8044459369</string>
+    <string name="apptitle">गुजरात एज्युकेशन</string>
+
+    <string name="selectlanguage">तुमची भाषा निवडा </string>
+    <string name="gujarati_lang">ગુજરાતી</string>
+    <string name="english_lang">English</string>
+    <string name="hindi_lang">हिंदी</string>
+    <string name="marathi_lang">मराठी</string>
+    <string name="odiya_lang">ଓଡ଼ିଆ</string>
+    <string name="telugu_lang">తెలుగు</string>
+    <string name="urdu_lang">اردو۔</string>
+    <string name="home_availableclass">Available Class</string>
+    <string name="menu_share">Share</string>
+    <string name="select_category">Select Category</string>
+    <string name="fdcategory">Feedback Category</string>
+    <string name="btn_view">View</string>
+    <string name="logincontinue">शिक्षक किंवा विद्यार्थी म्हणून सुरू ठेवण्यासाठी लॉगिन करा</string>
+    <string name="emailid">ई - मेल आयडी</string>
+    <string name="login_password">पासवर्ड</string>
+    <string name="forgetpassword">पासवर्ड विसरलात ?</string>
+    <string name="login">लोगिन</string>
+    <string name="continuewith">किंवा च्या सोबत सुरू ठेवा</string>
+    <string name="google"> गु  ग ल </string>
+    <string name="no_account">आपल्याकडे खाते नाही </string>
+    <string name="create_account">खाते तयार करा</string>
+    <string name="fullname">पूर्ण नाव</string>
+    <string name="emailid_1">ई - मेल आयडी</string>
+    <string name="login_password_1">पासवर्ड</string>
+    <string name="mobileno">मोबाईल नंबर</string>
+    <string name="sellect_role">तुमची भूमिका निवडा</string>
+    <string name="teacher">शिक्षक</string>
+    <string name="student">विद्यार्थी</string>
+    <string name="schoolname">शाळेचे नाव </string>
+    <string name="taluka">तालुका</string>
+    <string name="distict">जिल्हा</string>
+    <string name="termsandconditions">मी आपल्या अटी व शर्तींशी सहमत आहे</string>
+    <string name="register"> नोंदणी करा </string>
+
+    <string name="profile_hi_title">नमस्कार, "</string>
+    <string name="update_available">नवीन अपडेट उपलब्ध आहे</string>
+
+    <string name="myaccount">माझे खाते</string>
+    <string name="menu_mygroups">माझे ग्रुप</string>
+    <string name="donation">समर्थन</string>
+    <string name="menu_minami_duniya">मीनाची दुनिया</string>
+    <!--<string name="menu_evalution">मुल्यांकन पत्रक</string> -->
+    <string name="creditors">श्रेय </string>
+    <string name="aboutus">आमच्या विषयी</string>
+    <string name="menu_shareapp">शेअर एप्लिकेशन</string>
+    <string name="menu_feedback">आपले मंतव्य </string>
+    <string name="menu_term_conditions">नियम आणि अटी</string>
+    <string name="menu_notification">नोटीफिकेषण</string>
+    <string name="menu_logout">बाहेर निघा</string>
+
+    <string name="available_all_class">उपलब्ध सर्व वर्ग</string>
+    <string name="guj_state_only">(फक्त गुजरात राज्यासाठी)</string>
+    <string name="home_live_class">लाईव्ह क्लास / कॉन्फरन्स</string>
+    <string name="home_educationalcorner">शैक्षणिक कॉर्नर</string>
+    <string name="home_compititive_exams">स्पर्धा परीक्षा</string>
+    <string name="home_newsandcircular">बातम्या आणि परिपत्रके</string>
+    <string name="home_daysspecial">दिवस विशेष </string>
+    <string name="home_links">महत्वाच्या लिंक</string>
+    <string name="home_magazines">मासिके</string>
+    <string name="home_calender">कॅलेंडर</string>
+    <string name="primary">प्राथमिक</string>
+    <string name="pre_primary">पूर्व-प्राथमिक</string>
+    <string name="early_education">प्रारंभिक शिक्षण</string>
+    <string name="high_primary">उच्च प्राथमिक</string>
+    <string name="secondary">माध्यमिक </string>
+    <string name="high_secondary">उच्च माध्यमिक </string>
+
+    <string name="_class">ईयत्ता</string>
+    <string name="nursery">अंगणवाडी</string>
+    <string name="junior_kg">बालवाटिका</string>
+    <string name="senior_kg">बालवाडी</string>
+    <string name="class_1">१</string>
+    <string name="class_2">२</string>
+    <string name="class_3">३</string>
+    <string name="class_4">४</string>
+    <string name="class_5">५</string>
+    <string name="class_6">६</string>
+    <string name="class_7">७</string>
+    <string name="class_8">८</string>
+    <string name="class_9">९</string>
+    <string name="class_10">१०</string>
+    <string name="class_11">११</string>
+    <string name="class_12">१२</string>
+
+    <string name="view">पहा</string>
+    <string name="yearly">वार्षिक</string>
+    <string name="semester">सत्र</string>
+    <string name="Pri_primary_quize">प्रश्नोत्तरी प्रारंभ करा</string>
+
+    <string name="subject">विषय</string>
+    <string name="textbook">पाठ्य पुस्तक</string>
+    <string name="blueprint">ब्लूप्रिंट</string>
+    <string name="syllabus">अभ्यासक्रम</string>
+    <string name="studyconclusion">अध्ययन निष्पत्ती</string>
+    <string name="teacheraddition">शिक्षक मार्गदर्शिका</string>
+    <string name="videos">व्हिडीओ</string>
+    <string name="exercise">स्वाधाय कार्य</string>
+    <string name="Worksheet_chaptr">वर्कशीट</string>
+    <string name="Worksheet_semester">वर्कशीट</string>
+    <string name="old_papers">जुने पेपर</string>
+    <string name="essay">निबंध</string>
+    <string name="quiz">एम.सी.क्यू. टेस्ट</string>
+    <string name="result">निकाल</string>
+    <string name="select_option">पर्याय निवडा</string>
+    <string name="more_info">अधिक माहिती</string>
+
+    <string name="Com_exam_paper_name">पेपरचे नाव</string>
+    <string name="Com_exam_subject_name">एखादा विषय निवडा</string>
+    <string name="Com_exam_chapter_options">धड्याचा पर्याय निवडा</string>
+    <string name="Com_exam_information">अधिक माहिती</string>
+    <string name="Com_exam_chapter">धडा</string>
+    <string name="Com_exam_details">तपशील</string>
+    <string name="Com_exam_subject">विषय</string>
+    <string name="Com_exam_textbook">पाठ्य पुस्तक</string>
+    <string name="Com_exam_blueprint">ब्लूप्रिंट</string>
+    <string name="Com_exam_syllabus">अभ्यासक्रम</string>
+    <string name="Com_exam_videos">व्हिडीओ</string>
+    <string name="Com_exam_Worksheet_chaptr">वर्कशीट</string>
+    <string name="Com_exam_Worksheet_suject">वर्कशीट</string>
+    <string name="Com_exam_old_papers">जुने पेपर</string>
+
+    <string name="Donation_btn">समर्थन करा</string>
+
+    <string name="news_see_btn">पहा</string>
+    <string name="news_share_btn">शेअर करा</string>
+
+    <string name="magazines_see_btn">पहा</string>
+    <string name="magazines_share_btn">शेअर करा</string>
+
+    <string name="calender_see_btn">पहा</string>
+    <string name="calender_share_btn">शेअर करा</string>
+
+    <string name="daysspecial_see_btn">पहा</string>
+    <string name="daysspecial_share_btn">शेअर करा</string>
+
+</resources>
