@@ -82,7 +82,12 @@ public class NewsCircularScreen extends AppCompatActivity implements OnResult {
 
         //List<String> testDeviceIds = Arrays.asList("FA6829B84BA0124B24A6C4019575F9D6");
 
-        List<String> testDeviceIds = Arrays.asList("8A898BC8824C996E9320D350D4AF1F10");
+        //List<String> testDeviceIds = Arrays.asList("8A898BC8824C996E9320D350D4AF1F10");
+        List<String> testDeviceIds = new ArrayList<String>();
+        testDeviceIds.add("8A898BC8824C996E9320D350D4AF1F10");
+        testDeviceIds.add("FFB848305EE41D5DB1D6C522BFB75BEE");
+        testDeviceIds.add("105122E1816DB58B97D2DF2E357E7A37");
+
         RequestConfiguration configuration =
                 new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
         MobileAds.setRequestConfiguration(configuration);

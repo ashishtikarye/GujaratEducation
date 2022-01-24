@@ -6,6 +6,7 @@
     <!-- AdMob ad unit IDs -->
     <string name="banner_home_footer">ca-app-pub-4992146571652437/8044459369</string>
     <string name="apptitle">गुजरात एज्युकेशन</string>
+    <string name="position">position</string>
 
     <string name="selectlanguage">तुमची भाषा निवडा </string>
     <string name="gujarati_lang">ગુજરાતી</string>

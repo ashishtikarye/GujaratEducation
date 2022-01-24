@@ -1,16 +1,10 @@
 C:\Users\7080.old\AppData\Local\Android\Sdk\platform-tools>adb devices
+E:\sdk\platform-tools>adb devices
 adb tcpip 5555
 disconnect usb cable
-adb connect 192.168.0.101
+adb connect 192.168.0.100
 
 ((MainActivity)getActivity()).startChronometer();
 
 "C:\Users\7080.old\AppData\Local\Android\Sdk\tools\bin\uiautomatorviewer.bat"
 
-C:\Users\7080.old\Execution Logs\autoitscript\GujaratEducation
-
-
-C:\Users\7080.old\Execution Logs\autoitscript\23-10-21GujaratEducation.7z
-C:\Users\7080.old\Execution Logs\autoitscript\23-10-21SamitiApplication.7z
-
-C:\Users\7080.old\Execution Logs\autoitscript\GujaratEducation

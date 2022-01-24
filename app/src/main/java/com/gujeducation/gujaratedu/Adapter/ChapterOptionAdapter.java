@@ -59,6 +59,7 @@ public class ChapterOptionAdapter extends RecyclerView.Adapter<ChapterOptionAdap
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final MyViewHolder menuItemHolder = holder;
         mFunction = new Functions(activity);
+
         //final String sectionList = listSection.get(position);
 
         /*Log.e("ChpOptnAdp_Pref", "mediumId->" + mFunction.getPrefMediumId() +

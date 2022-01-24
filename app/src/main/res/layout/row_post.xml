@@ -80,6 +80,19 @@
                     android:text="Samithi High School"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13sdp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvdatetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvusertype"
+                    android:layout_alignParentRight="true"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/pop_regular"
+                    android:singleLine="true"
+                    android:text="12/01/2022 05:03:12"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_11sdp" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -110,9 +123,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btnPlay"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_play"
-                android:layout_height="wrap_content" />
+                android:src="@drawable/ic_play" />
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -129,43 +142,57 @@
             android:textSize="@dimen/_13sdp" />
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/lvbottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_below="@+id/tvtopicname"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:weightSum="2">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:visibility="visible">
+
+
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:id="@+id/ivLike"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_alignParentLeft="true"
                 android:src="@drawable/ic_like" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:src="@drawable/ic_internet_download" />
+                android:id="@+id/likeCount"
+                android:fontFamily="@font/pop_bold"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:layout_toRightOf="@+id/ivLike"
+                android:layout_alignParentBottom="true"
+                android:textSize="@dimen/_12sdp"
+                android:text="3"/>
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:src="@drawable/ic_logout" />
+                android:id="@+id/ivShare"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:tint="@color/black"
+                android:src="@drawable/ic_c_share" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:id="@+id/ivOption"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_threedots" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

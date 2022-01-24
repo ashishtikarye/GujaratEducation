@@ -1422,8 +1422,26 @@ public class APIs {
                 .build();
         String query = String.valueOf(uri);
         APIs.callAPI(activity, onresult, URLDecoder.decode(query));
-    }//http://gujarateducation.org/android_api/getEducationCornerList.php?userId=1
+    }//http://gujarateducation.org/android_api/getEducationCornerList.php
 
+
+    public static void doLikePost(AppCompatActivity activity, OnResult onresult, int userId, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("doLike.php?userId=" + userId + "&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/doLikeDislike.php?userId=139&postId=1
+
+    public static void doDislikePost(AppCompatActivity activity, OnResult onresult, int userId, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("doDislike.php?userId=" + userId + "&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }
 
     public static void getNotificationList(AppCompatActivity activity, OnResult onresult, String role) {
         Uri uri = new Uri.Builder().scheme("http")

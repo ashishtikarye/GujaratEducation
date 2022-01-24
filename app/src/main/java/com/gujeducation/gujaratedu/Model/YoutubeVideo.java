@@ -3,12 +3,16 @@ package com.gujeducation.gujaratedu.Model;
 public class YoutubeVideo {
 
 
-    private int postId,userId;
-    private String title,image,pdf,youtubeLink,like_count,fullname,schoolname,role,user_image;
+    private int postId, userId,like;
+    private String title, image, pdf, youtubeLink, like_count, fullname, schoolname, role, user_image;
+    private boolean isActive;
 
-    public YoutubeVideo(int postId, int userId, String title, String image, String pdf, String youtubeLink, String like_count, String fullname, String schoolname, String role, String user_image) {
+
+
+    public YoutubeVideo(int postId, int userId,int like, String title, String image, String pdf, String youtubeLink, String like_count, String fullname, String schoolname, String role, String user_image, boolean isActive) {
         this.postId = postId;
         this.userId = userId;
+        this.like = like;
         this.title = title;
         this.image = image;
         this.pdf = pdf;
@@ -18,6 +22,8 @@ public class YoutubeVideo {
         this.schoolname = schoolname;
         this.role = role;
         this.user_image = user_image;
+        this.isActive = isActive;
+
     }
 
     public int getPostId() {
@@ -34,6 +40,14 @@ public class YoutubeVideo {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 
     public String getTitle() {
@@ -106,5 +120,13 @@ public class YoutubeVideo {
 
     public void setUser_image(String user_image) {
         this.user_image = user_image;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

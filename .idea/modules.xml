@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GujaratEducation.iml" filepath="$PROJECT_DIR$/.idea/modules/GujaratEducation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GujaratEducation.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GujaratEducation.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/filepicker/GujaratEducation.filepicker.iml" filepath="$PROJECT_DIR$/.idea/modules/filepicker/GujaratEducation.filepicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GujaratEducation.iml" filepath="$PROJECT_DIR$/.idea/modules/GujaratEducation.iml" group="GujaratEducation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="GujaratEducation/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/filepicker/filepicker.iml" filepath="$PROJECT_DIR$/.idea/modules/filepicker/filepicker.iml" group="GujaratEducation/filepicker" />
     </modules>
   </component>
 </project>
