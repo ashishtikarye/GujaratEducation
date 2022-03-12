@@ -4,12 +4,12 @@ public class YoutubeVideo {
 
 
     private int postId, userId,like;
-    private String title, image, pdf, youtubeLink, like_count, fullname, schoolname, role, user_image;
+    private String title, image, pdf, youtubeLink,datetime, like_count, fullname, schoolname, role, user_image;
     private boolean isActive;
 
 
 
-    public YoutubeVideo(int postId, int userId,int like, String title, String image, String pdf, String youtubeLink, String like_count, String fullname, String schoolname, String role, String user_image, boolean isActive) {
+    public YoutubeVideo(int postId, int userId,int like, String title, String image, String pdf, String youtubeLink, String datetime, String like_count, String fullname, String schoolname, String role, String user_image, boolean isActive) {
         this.postId = postId;
         this.userId = userId;
         this.like = like;
@@ -17,6 +17,7 @@ public class YoutubeVideo {
         this.image = image;
         this.pdf = pdf;
         this.youtubeLink = youtubeLink;
+        this.datetime = datetime;
         this.like_count = like_count;
         this.fullname = fullname;
         this.schoolname = schoolname;
@@ -40,6 +41,14 @@ public class YoutubeVideo {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public int getLike() {

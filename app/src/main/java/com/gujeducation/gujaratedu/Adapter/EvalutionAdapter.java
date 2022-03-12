@@ -88,7 +88,6 @@ public class EvalutionAdapter extends RecyclerView.Adapter<EvalutionAdapter.MyVi
         public MyViewHolder(View itemView) {
             super(itemView);
             tvPatrakName = (AppCompatTextView) itemView.findViewById(R.id.tv_sublink_name);
-
         }
     }
 

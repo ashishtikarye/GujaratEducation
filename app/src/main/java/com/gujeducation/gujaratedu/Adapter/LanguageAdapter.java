@@ -1,9 +1,12 @@
 package com.gujeducation.gujaratedu.Adapter;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +30,9 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
     ArrayList<Language> listLanguage = new ArrayList();
     Functions mFunction;
     Intent intent;
+    Dialog dialogLogin;
+    AppCompatImageView mIvClosePopup;
+    LinearLayout mLlGoogleLogin;
     private int mNumColumns = 0;
 
     public LanguageAdapter(AppCompatActivity activity, ArrayList<Language> listLanguage) {
@@ -42,7 +48,7 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        final MyViewHolder menuItemHolder = (MyViewHolder) holder;
+        final MyViewHolder menuItemHolder = holder;
         //mPreference = activity.getSharedPreferences(activity.getResources().getString(R.string.app_name), MODE_PRIVATE);
         mFunction = new Functions(activity);
         final Language languageList = listLanguage.get(position);
@@ -122,8 +128,9 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
                         intent = new Intent(activity, HomeScreen.class);
                         activity.startActivity(intent);
                     } else {
-                        intent = new Intent(activity, SignInScreen.class);
-                        activity.startActivity(intent);
+                        showGooglePlusLogin();
+                        /*intent = new Intent(activity, SignInScreen.class);
+                        activity.startActivity(intent);*/
                     }
 
                 }
@@ -133,6 +140,43 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
         }
 
     }
+
+    public void showGooglePlusLogin() {
+
+        dialogLogin = new Dialog(
+                activity, R.style.popupTheme);
+        LayoutInflater inflater = (LayoutInflater)
+                activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.popup_googlelogin, null);
+        dialogLogin.setContentView(view); // your custom view.
+        dialogLogin.setCancelable(true);
+        dialogLogin.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialogLogin.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogLogin.show();
+
+        mLlGoogleLogin = view.findViewById(R.id.lvgoogleplus);
+        mIvClosePopup = view.findViewById(R.id.ivclosegl);
+        mIvClosePopup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogLogin.dismiss();
+                intent = new Intent(activity, SignInScreen.class);
+                intent.putExtra("loginType", "email");
+                activity.startActivity(intent);
+            }
+        });
+
+        mLlGoogleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogLogin.dismiss();
+                intent = new Intent(activity, SignInScreen.class);
+                intent.putExtra("loginType", "google");
+                activity.startActivity(intent);
+            }
+        });
+    }
+
 
     @Override
     public int getItemCount() {
@@ -154,9 +198,9 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.MyView
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvLanguage = (AppCompatTextView) itemView.findViewById(R.id.tvlanguage);
-            rlvLanguage = (RelativeLayout) itemView.findViewById(R.id.rlv_language);
-            ivLanguage = (AppCompatImageView) itemView.findViewById(R.id.ivlanguage);
+            tvLanguage = itemView.findViewById(R.id.tvlanguage);
+            rlvLanguage = itemView.findViewById(R.id.rlv_language);
+            ivLanguage = itemView.findViewById(R.id.ivlanguage);
             //mIvBoardMemberPic = (AppCompatImageView) itemView.findViewById(R.id.iv_bmemberpic);
             //mIvBoardMemberPic = (CircularImageView) itemView.findViewById(R.id.iv_bmemberpic);
         }

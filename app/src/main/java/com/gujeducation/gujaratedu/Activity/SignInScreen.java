@@ -55,7 +55,7 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
     SharedPreferences.Editor editor;
     Locale myLocale;
     //String currentLanguage = "en";
-    String loginWith = "", strEmail = "", strDisplayName = "";
+    String loginWith = "", strEmail = "", strDisplayName = "",strLoginType="";
     String device_os, device_osversion, firebase_token, device_model, devicUUID;
     private GoogleApiClient googleApiClient;
     private GoogleSignInOptions gso;
@@ -101,6 +101,16 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
                 " firebase_token-" + firebase_token + "\ndevice_model-" + device_model +
                 "\ndevice_osversion-" + device_osversion + "\ndevice_os-" + device_os);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("loginType")) {
+            strLoginType = intent.getExtras().getString("loginType");
+        } else {
+            strLoginType = "Unknown";
+        }
+
+        Log.e("strLoginType", " -->" + strLoginType);
+
+
         //SignInButton signInButton = findViewById(R.id.sign_in_button);
         mLlGoogleSignIn = findViewById(R.id.lvgoogleplus);
         btnLogin = findViewById(R.id.btnLogin);
@@ -116,7 +126,6 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
         //Toast.makeText(mcontext, "LanguageCode--" + mFunction.getPrefLanguageCode(), Toast.LENGTH_SHORT).show();
         //   signInButton.setSize(SignInButton.SIZE_WIDE);
 
-        //Log.e("SignInScreen-->", "MediumId->" + mFunction.getPrefMediumId());
 
 
         myLocale = getResources().getConfiguration().locale;
@@ -131,6 +140,12 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
+
+        if(strLoginType.equalsIgnoreCase("google")){
+            Intent gntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            startActivityForResult(gntent, RC_SIGN_IN);
+        }
         mLlGoogleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

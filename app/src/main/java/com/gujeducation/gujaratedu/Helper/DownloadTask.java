@@ -2,26 +2,26 @@ package com.gujeducation.gujaratedu.Helper;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
-
-import androidx.core.app.ActivityCompat;
 
 import com.gujeducation.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -35,21 +35,22 @@ import android.support.v7.view.ContextThemeWrapper;*/
  */
 public class DownloadTask {
     private static final String TAG = "Download Task";
-    private Context context;
-    private String downloadFileName;
-    private File downloadUrl;
-    private ProgressDialog progressDialog;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static final int REQUEST_WRITE_STORAGE = 112;
-    private static String[] PERMISSIONS_STORAGE = {
+    private static final String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
+    private final Context context;
+    private final String downloadFileName;
+    private final File downloadUrl;
+    private ProgressDialog progressDialog;
 
 
-    public static void verifyStoragePermissions(Activity activity) {
+    /*public static void verifyStoragePermissions(Activity activity) {
         // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permission = ActivityCompat.checkSelfPermission(activity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             // We don't have permission so prompt the user
@@ -59,7 +60,9 @@ public class DownloadTask {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
-    }
+    }*/
+
+
 
 
     public DownloadTask(Context context, File downloadUrl, String downloadFileName) {
@@ -77,8 +80,8 @@ public class DownloadTask {
 
     private class DownloadingTask extends AsyncTask<Void, Void, Void> {
 
-        File sourceLocation=null;
-        File targetLocation=null;
+        File sourceLocation = null;
+        File targetLocation = null;
 
         @Override
         protected void onPreExecute() {
@@ -109,8 +112,7 @@ public class DownloadTask {
                     builder.setNegativeButton("Open", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            File file  = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName);  // -> filename = maven.pdf
-
+                            File file = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName.trim());  // -> filename = maven.pdf
                             Intent intent = new Intent(Intent.ACTION_VIEW);
                             intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -155,21 +157,100 @@ public class DownloadTask {
             super.onPostExecute(result);
         }
 
+        @SuppressLint("NewApi")
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
+              /*  String release = Build.VERSION.RELEASE;
+                int sdkVersion = Build.VERSION.SDK_INT;*/
+                Log.e("R0", "--->" + downloadUrl.toString());
+                Log.e("R1", "--->" + downloadFileName.trim());
+                String sourcePath = context.getApplicationContext().getExternalCacheDir().getAbsolutePath()+"/વિદ્યાર્થી પહેલ યોજના અંતર્ગત દરખાસ્ત મોકલવા બાબત";
+                //String sourcePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/TongueTwister/tt_temp.3gp";
+                File source = new File(sourcePath);
+
+                String destinationPath = context.getApplicationContext().getExternalFilesDir("PDF").getAbsolutePath() +"/વિદ્યાર્થી પહેલ યોજના અંતર્ગત દરખાસ્ત મોકલવા બાબત";
+                File destination = new File(destinationPath);
+
+                InputStream ins = new FileInputStream(sourcePath);
+                OutputStream outs = new FileOutputStream(destinationPath);
+
+                try
+                {
+                    FileUtils.copy(ins, outs);
+                    //FileUtils.copyFile(source, destination);
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
 
 
 
-                sourceLocation = new File(downloadUrl.toString());
-                targetLocation = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName);  // -> filename = maven.pdf
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+                    Log.e("111-", "300");
+
+                    /*File externalFolder = context.getApplicationContext().getExternalFilesDir("PDF");
+                    externalFolder.getAbsolutePath();
+*/
+                    final String dirPath = context.getApplicationContext().getExternalFilesDir("").getAbsolutePath();
+                    Log.e("downloaet", "dirPath-" + dirPath +
+                            "\ndownloadFileName-" + downloadFileName);
+                    targetLocation = new File(dirPath +"/"+ downloadFileName.trim());
+                    Log.e("targetLocation", "--->" + targetLocation);
+                    //targetLocation = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName.trim());  // -> filename = maven.pdf
+
+                    //context.getApplicationContext().getExternalFilesDir(downloadUrl.toString());
+                    //File externalFolder = context.getApplicationContext().getExternalFilesDir("");
+     //Log.e("externalFolder", "--->" + externalFolder.getName()); //files
+                 //   Log.e("R0", "--->" + downloadUrl.toString());
+                    //Log.e("R1", "--->" + downloadFileName.trim());
+                    //Log.e("R2", "--->" + context.getApplicationContext().getExternalFilesDir("/GujaratEducation/") + downloadFileName.trim());
+
+                   // sourceLocation = new File(downloadUrl.toString());
+                    Log.e("sourceLocation","--------"+sourceLocation.toString());
+                   // targetLocation = new File(context.getApplicationContext().getExternalFilesDir("/Guj/") + downloadFileName.trim());  // -> filename = maven.pdf
+
+                    Log.e("targetLocation","--------"+targetLocation.toString());
+
+                } else {
+
+                    Log.e("getExtrnlStorgDir", "0--->" + Environment.getExternalStorageDirectory());
+                    Log.e("getExtrnlStorgDir", "1--->" + Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName.trim());
+                    Log.e("getExtrnlStorgDir", "2--->" + downloadUrl.toString());
+
+                    sourceLocation = new File(downloadUrl.toString());
+                    targetLocation = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName.trim());  // -> filename = maven.pdf
+
+                    File targetLocationMkDir = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation");
+                    Log.e("targetLoc", "-->" + targetLocationMkDir.exists());
+                    Log.e("targetLoc", "abspath-->" + targetLocationMkDir.getAbsoluteFile());
+
+                    if (!targetLocationMkDir.exists()) {
+                        targetLocationMkDir.mkdir();
+                    }
+                }
+
+
+                // I used the context.getExternalFilesDir(Environment.DIRECTORY_MOVIES) to save it to the file path /storage/emulated/0/Android/data/com.example.xxxx/files/Movies.
+
+
+                /*sourceLocation = new File(downloadUrl.toString());
+                targetLocation = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation/" + downloadFileName.trim());  // -> filename = maven.pdf
+
                 File targetLocationMkDir = new File(Environment.getExternalStorageDirectory() + "/GujaratEducation");
-
+                Log.e("targetLoc", "-->" + targetLocationMkDir.exists());
+                Log.e("targetLoc", "abspath-->" + targetLocationMkDir.getAbsoluteFile());
 
                 if (!targetLocationMkDir.exists()) {
                     targetLocationMkDir.mkdir();
-                }
-                if(sourceLocation.exists()){
+                }*/
+
+                Log.e("sourceLoc", "sourceLocation is ->" + sourceLocation);
+                if (sourceLocation.exists()) {
                     InputStream in = new FileInputStream(sourceLocation);
                     OutputStream out = new FileOutputStream(targetLocation);
 

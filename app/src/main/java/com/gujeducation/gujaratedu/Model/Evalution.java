@@ -1,17 +1,21 @@
 package com.gujeducation.gujaratedu.Model;
 
 public class Evalution {
-    int evalutionId, mediumId, standardId, semesterId;
-    String patrak, pdf, pdf_name;
+    int evalutionId, mediumId, standardId, semesterId,sectionId,subjectId;
+    String patrak, pdf, pdf_name,date;
 
-    public Evalution(int evalutionId, int mediumId, int standardId, int semesterId, String patrak, String pdf, String pdf_name) {
+
+    public Evalution(int evalutionId, int mediumId, int standardId, int semesterId, int sectionId, int subjectId, String patrak, String pdf, String pdf_name, String date) {
         this.evalutionId = evalutionId;
         this.mediumId = mediumId;
         this.standardId = standardId;
         this.semesterId = semesterId;
+        this.sectionId = sectionId;
+        this.subjectId = subjectId;
         this.patrak = patrak;
         this.pdf = pdf;
         this.pdf_name = pdf_name;
+        this.date = date;
     }
 
     public int getEvalutionId() {
@@ -46,6 +50,22 @@ public class Evalution {
         this.semesterId = semesterId;
     }
 
+    public int getSectionId() {
+        return sectionId;
+    }
+
+    public void setSectionId(int sectionId) {
+        this.sectionId = sectionId;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
+    }
+
     public String getPatrak() {
         return patrak;
     }
@@ -68,5 +88,13 @@ public class Evalution {
 
     public void setPdf_name(String pdf_name) {
         this.pdf_name = pdf_name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

@@ -55,7 +55,7 @@
                     android:singleLine="true"
                     android:text="Ashish Tikarye"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvusertype"
@@ -63,23 +63,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:ellipsize="end"
-                    android:fontFamily="@font/pop_regular"
+                    android:fontFamily="@font/pop_semibold"
                     android:singleLine="true"
                     android:text="(Teacher)"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_11sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvschoolname"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvfullname"
+                    android:layout_toLeftOf="@+id/tvdatetime"
                     android:ellipsize="end"
                     android:fontFamily="@font/pop_medium"
                     android:singleLine="true"
                     android:text="Samithi High School"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvdatetime"
@@ -87,12 +88,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvusertype"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/pop_regular"
+                    android:fontFamily="@font/pop_semibold"
                     android:singleLine="true"
                     android:text="12/01/2022 05:03:12"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/_11sdp" />
+                    android:textSize="@dimen/_9sdp" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -151,45 +153,43 @@
             android:visibility="visible">
 
 
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivLike"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
+                android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_alignParentLeft="true"
                 android:src="@drawable/ic_like" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/likeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/likeCount"
-                android:fontFamily="@font/pop_bold"
-                android:layout_marginLeft="@dimen/_3sdp"
-                android:layout_toRightOf="@+id/ivLike"
                 android:layout_alignParentBottom="true"
-                android:textSize="@dimen/_12sdp"
-                android:text="3"/>
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:layout_toRightOf="@+id/ivLike"
+                android:fontFamily="@font/pop_bold"
+                android:text="1"
+                android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivShare"
-                android:layout_width="@dimen/_24sdp"
-                android:layout_height="@dimen/_24sdp"
-                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
                 android:layout_centerInParent="true"
-                android:tint="@color/black"
-                android:src="@drawable/ic_c_share" />
+                android:src="@drawable/ic_share_p"
+                android:tint="@color/black" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivOption"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:layout_marginRight="@dimen/_10sdp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_threedots" />
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/ic_edit" />
 
 
         </RelativeLayout>

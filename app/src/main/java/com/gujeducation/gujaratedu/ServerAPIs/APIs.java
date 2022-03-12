@@ -2,6 +2,7 @@ package com.gujeducation.gujaratedu.ServerAPIs;
 
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -864,13 +865,10 @@ public class APIs {
         APIs.callAPI(activity, onresult, URLDecoder.decode(query));
     }
 
-    public static void getEvaluation(AppCompatActivity activity, OnResult onresult, int medium_id, int semester_id,
-                                     int sectionId,
-                                     int standardId) {
+    public static void getEvaluation(AppCompatActivity activity, OnResult onresult, int medium_id, int subject_id,String option_Type) {
         Uri uri = new Uri.Builder().scheme("http")
                 .authority(Connection.SERVER_GETURL)
-                .path("getEvolution.php?mediumId=" + medium_id + "&sectionId=" + sectionId + "&semesterId=" + semester_id +
-                        "&standardId=" + standardId)
+                .path("getOldPprEssay.php?mediumId=" + medium_id + "&subjectId=" + subject_id + "&optionType=" + option_Type )
                 .build();
         String query = String.valueOf(uri);
         //Log.e("getEvaluation", "Calling API:" + URLDecoder.decode(query));
@@ -938,6 +936,25 @@ public class APIs {
         APIs.callAPI(activity, onresult, URLDecoder.decode(query));
     }
 
+    public static void getDistrictList(AppCompatActivity activity, OnResult onresult, int mediumId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("getDistrict.php?mediumId=" + mediumId)
+                .build();
+        String query = String.valueOf(uri);
+        //Log.e("getBoardMembers", "Calling API:" + URLDecoder.decode(query));
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/getDistrict.php?mediumId=4
+
+    public static void getTalukaList(AppCompatActivity activity, OnResult onresult, int districtId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("getTaluka.php?districtId=" + districtId)
+                .build();
+        String query = String.valueOf(uri);
+        //Log.e("getBoardMembers", "Calling API:" + URLDecoder.decode(query));
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/getTaluka.php?districtId=104
 
     public static void getSSAStaff(AppCompatActivity activity, OnResult onresult) {
         Uri uri = new Uri.Builder().scheme("http")
@@ -1415,14 +1432,50 @@ public class APIs {
         APIs.callAPI(activity, onresult, URLDecoder.decode(query));
     }
 
-    public static void getEducationCornerList(AppCompatActivity activity, OnResult onresult) {
+    public static void getEducationCornerList(AppCompatActivity activity, OnResult onresult, int userId) {
         Uri uri = new Uri.Builder().scheme("http")
                 .authority(Connection.SERVER_GETURL)
-                .path("getEducationCornerList.php")
+                .path("getEducationCornerList.php?userId=" + userId)
                 .build();
         String query = String.valueOf(uri);
         APIs.callAPI(activity, onresult, URLDecoder.decode(query));
     }//http://gujarateducation.org/android_api/getEducationCornerList.php
+
+    public static void checkEditDelReport(AppCompatActivity activity, OnResult onresult, int userId, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("checkEditDelReport.php?userId=" + userId + "&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/checkEditDelReport.php?userId=1&postId=145
+
+    public static void getPostInfo(AppCompatActivity activity, OnResult onresult, int userId, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("getPostInfo.php?userId=" + userId + "&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/getPostInfo.php?userId=1&postId=34
+
+    public static void deletePost(AppCompatActivity activity, OnResult onresult, int userId, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("deletePost.php?userId=" + userId + "&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/deletePost.php?userId=1&postId=34
+
+    public static void reportPost(AppCompatActivity activity, OnResult onresult, int postId) {
+        Uri uri = new Uri.Builder().scheme("http")
+                .authority(Connection.SERVER_GETURL)
+                .path("reportPost.php?&postId=" + postId)
+                .build();
+        String query = String.valueOf(uri);
+        APIs.callAPI(activity, onresult, URLDecoder.decode(query));
+    }//http://gujarateducation.org/android_api/reportPost.php?postId=34
 
 
     public static void doLikePost(AppCompatActivity activity, OnResult onresult, int userId, int postId) {

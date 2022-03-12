@@ -54,8 +54,7 @@ public class EvalutionScreen extends AppCompatActivity implements OnResult {
         recyclerViewEvalution.setLayoutManager(mLayoutManager);
 
         if(mFunctions.knowInternetOn(this)){
-            APIs.getEvaluation(EvalutionScreen.this,this,mFunctions.getPrefMediumId(),mFunctions.getSemester(),
-                    mFunctions.getSection(),mFunctions.getStandardId());
+            APIs.getEvaluation(EvalutionScreen.this,this,mFunctions.getPrefMediumId(),mFunctions.getSubjectId(),"Evalution");
         }
         else {
             Functions.showInternetAlert(this);
@@ -80,19 +79,22 @@ public class EvalutionScreen extends AppCompatActivity implements OnResult {
                 String strMessage = jObj.optString("message");
 
                 if (strStatus != 0) {
-                    JSONArray jArrayTextSub = jObj.getJSONArray("evalution");
+                    JSONArray jArrayTextSub = jObj.getJSONArray("resdata");
                     if (jArrayTextSub.length() > 0) {
                         for (int i = 0; i < jArrayTextSub.length(); i++) {
                             try {
                                 JSONObject obj = jArrayTextSub.getJSONObject(i);
                                 listArrEvalution.add(new Evalution(
                                         obj.optInt("evalutionId"),
+                                        obj.optInt("semesterId"),
+                                        obj.optInt("sectionId"),
                                         obj.optInt("mediumId"),
                                         obj.optInt("standardId"),
-                                        obj.optInt("semesterId"),
+                                        obj.optInt("subjectId"),
                                         obj.optString("patrak"),
-                                        obj.optString("image"),
-                                        obj.optString("pdf_name")
+                                        obj.optString("pdf"),
+                                        obj.optString("pdf_name"),
+                                        obj.optString("date")
                                 ));
                             } catch (JSONException e) {
                                 e.printStackTrace();

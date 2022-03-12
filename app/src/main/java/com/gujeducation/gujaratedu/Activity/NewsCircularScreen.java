@@ -87,6 +87,7 @@ public class NewsCircularScreen extends AppCompatActivity implements OnResult {
         testDeviceIds.add("8A898BC8824C996E9320D350D4AF1F10");
         testDeviceIds.add("FFB848305EE41D5DB1D6C522BFB75BEE");
         testDeviceIds.add("105122E1816DB58B97D2DF2E357E7A37");
+        testDeviceIds.add("ED6E76F6E947CC1B01B01524B255999E");
 
         RequestConfiguration configuration =
                 new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
@@ -227,7 +228,7 @@ public class NewsCircularScreen extends AppCompatActivity implements OnResult {
             loadInterstitialAd();
 
             // Showing a simple Toast message to user when an ad is not loaded
-            Toast.makeText(NewsCircularScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(NewsCircularScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -239,7 +240,7 @@ public class NewsCircularScreen extends AppCompatActivity implements OnResult {
         adRequest.isTestDevice(NewsCircularScreen.this);
 
         // Showing a simple Toast message to user when an ad is Loading
-        Toast.makeText(NewsCircularScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(NewsCircularScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
     }
 
 

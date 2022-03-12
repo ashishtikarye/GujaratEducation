@@ -16,6 +16,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Adapter.DaysSpecialListAdapter;
 import com.gujeducation.gujaratedu.Helper.Connection;
@@ -29,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DaysSpecialScreen extends AppCompatActivity implements OnResult {
 
@@ -56,53 +59,15 @@ public class DaysSpecialScreen extends AppCompatActivity implements OnResult {
         interstitialAd.setAdUnitId("ca-app-pub-6923797063551368/3272831029");
         //loadInterstitialAd();
 
-        interstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
+        List<String> testDeviceIds = new ArrayList<String>();
+        testDeviceIds.add("8A898BC8824C996E9320D350D4AF1F10");
+        testDeviceIds.add("FFB848305EE41D5DB1D6C522BFB75BEE");
+        testDeviceIds.add("105122E1816DB58B97D2DF2E357E7A37");
+        testDeviceIds.add("ED6E76F6E947CC1B01B01524B255999E");
 
-                // Showing a simple Toast message to user when an ad is loaded
-             //   Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad is Loaded", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-
-                // Showing a simple Toast message to user when and ad is failed to load
-            //    Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad Failed to Load ", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Showing a simple Toast message to user when an ad opens and overlay and covers the device screen
-            //    Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad Opened", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAdClicked() {
-
-                // Showing a simple Toast message to user when a user clicked the ad
-             //   Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad Clicked", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-
-                // Showing a simple Toast message to user when the user left the application
-             //   Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad Left the Application", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onAdClosed() {
-
-                //loading new interstitialAd when the ad is closed
-                //loadInterstitialAd();
-
-                // Showing a simple Toast message to user when the user interacted with ad and got the other app and then return to the app again
-                //Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad is Closed", Toast.LENGTH_LONG).show();
-
-            }
-        });
-
+        RequestConfiguration configuration =
+                new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+        MobileAds.setRequestConfiguration(configuration);
 
         btnBack = (AppCompatImageView)findViewById(R.id.ivback);
         recyclerViewDaysSpecialList = (RecyclerView) findViewById(R.id.recyclerview_daysspecial);
@@ -190,29 +155,31 @@ public class DaysSpecialScreen extends AppCompatActivity implements OnResult {
     }
 
 
-    public void loadInterstitialAd() {
-        // Creating  a Ad Request
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        // load Ad with the Request
-        interstitialAd.loadAd(adRequest);
-
-        // Showing a simple Toast message to user when an ad is Loading
-        //Toast.makeText(HomeScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_LONG).show();
-    }
     public void showInterstitialAd() {
         if (interstitialAd.isLoaded()) {
             //showing the ad Interstitial Ad if it is loaded
             interstitialAd.show();
 
             // Showing a simple Toast message to user when an Interstitial ad is shown to the user
-            //Toast.makeText(HomeScreen.this, "Interstitial is loaded and showing ad  ", Toast.LENGTH_LONG).show();
+            Toast.makeText(DaysSpecialScreen.this, "Interstitial is loaded and showing ad  ", Toast.LENGTH_SHORT).show();
         } else {
             //Load the Interstitial ad if it is not loaded
             loadInterstitialAd();
+
             // Showing a simple Toast message to user when an ad is not loaded
-            //Toast.makeText(HomeScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void loadInterstitialAd() {
+        // Creating  a Ad Request
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // load Ad with the Request
+        interstitialAd.loadAd(adRequest);
+        adRequest.isTestDevice(DaysSpecialScreen.this);
+
+        // Showing a simple Toast message to user when an ad is Loading
+        //Toast.makeText(DaysSpecialScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
     }
 }
 

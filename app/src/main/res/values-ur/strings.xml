@@ -7,7 +7,9 @@
     <string name="banner_home_footer">ca-app-pub-4992146571652437/8044459369</string>
     <string name="apptitle">گجرات کی تعلیم</string>
     <string name="position">position</string>
-
+    <string name="editpost">Edit This Post</string>
+    <string name="deletepost">Delete This Post</string>
+    <string name="reportpost">Report This Post</string>
     <string name="selectlanguage">اپنی زبان منتخب کریں</string>
     <string name="gujarati_lang">ગુજરાતી</string>
     <string name="english_lang">English</string>

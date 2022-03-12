@@ -1,6 +1,8 @@
 package com.gujeducation.gujaratedu.Activity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,9 +11,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,14 +25,20 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.gujeducation.R;
+import com.gujeducation.gujaratedu.Adapter.DistrictAdapter;
+import com.gujeducation.gujaratedu.Adapter.TalukaAdapter;
 import com.gujeducation.gujaratedu.Helper.Connection;
 import com.gujeducation.gujaratedu.Helper.Functions;
 import com.gujeducation.gujaratedu.Interface.OnResult;
+import com.gujeducation.gujaratedu.Model.District;
+import com.gujeducation.gujaratedu.Model.Taluka;
 import com.gujeducation.gujaratedu.ServerAPIs.APIs;
 import com.vincent.filepicker.Constant;
 import com.vincent.filepicker.activity.ImagePickActivity;
@@ -43,6 +53,8 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -53,11 +65,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyAccountScreen extends AppCompatActivity implements OnResult {
 
+    public static Dialog dialogDistTaluka;
     private final String[] RoleData = {"Select Role", "Student", "Teacher"};
+    private final ArrayList<District> listArrDistrict = new ArrayList<District>();
+    public AppCompatEditText mEdTaluka, mEdDistrict;
+    public ArrayList<Taluka> listArrTaluka = new ArrayList<Taluka>();
     Functions mFunctions;
     Intent intent;
-    AppCompatEditText mEdName, mEdSchool, mEdTaluka, mEdDistrict, mEdMobileNo, mEdEmailId;
-    AppCompatTextView mTvTitle, mEdRole;
+    AppCompatEditText mEdName, mEdSchool, mEdMobileNo, mEdEmailId;
+    AppCompatTextView mTvTitle, mEdRole, mTvDialogTitle;
     String role = "";
     AppCompatButton btnSubmit;
     FrameLayout mFlChooseImage;
@@ -65,6 +81,10 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
     CircleImageView mIvProfilePic;
     File pickImageFile = null;
     ProgressDialog progressD;
+    DistrictAdapter mDistrictAdapter;
+    TalukaAdapter mTalukaAdapter;
+    RecyclerView mRlDistrictTalukaDialog;
+    LinearLayoutManager mLayoutManager;
     private AppCompatImageView btnBack;
 
     @Override
@@ -83,7 +103,9 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
         mEdName = findViewById(R.id.edit_name);
         mEdSchool = findViewById(R.id.edit_schoolname);
         mEdTaluka = findViewById(R.id.edit_taluka);
+        //mEdTaluka.setInputType(InputType.TYPE_NULL);
         mEdDistrict = findViewById(R.id.edit_district);
+        //  mEdDistrict.setInputType(InputType.TYPE_NULL);
         mEdMobileNo = findViewById(R.id.edit_mobileno);
         mEdRole = findViewById(R.id.edit_iam);
         mEdRole.setInputType(InputType.TYPE_NULL);
@@ -91,6 +113,19 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
         mFlChooseImage = findViewById(R.id.frmChooseImg);
         mIvProfilePic = findViewById(R.id.ivuserprofilepic);
 
+
+        if (Functions.knowInternetOn(this)) {
+            APIs.getDistrictList(this, this, mFunctions.getPrefMediumId());
+        } else {
+            Functions.showInternetAlert(this);
+        }
+
+        mEdDistrict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDistrictTalukaPopup("d");
+            }
+        });
 
         mFlChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,6 +225,47 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
 
     }
 
+    public void showDistrictTalukaPopup(String type) {
+
+        dialogDistTaluka = new Dialog(
+                this, R.style.popupTheme);
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_district_taluka_list, null);
+        dialogDistTaluka.setContentView(view); // your custom view.
+        dialogDistTaluka.setCancelable(true);
+        dialogDistTaluka.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialogDistTaluka.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogDistTaluka.show();
+        mTvDialogTitle = (AppCompatTextView) view.findViewById(R.id.tv_dialogtitle);
+        mRlDistrictTalukaDialog = (RecyclerView) view.findViewById(R.id.recyclerview_distal);
+
+
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mRlDistrictTalukaDialog.setHasFixedSize(true);
+        mRlDistrictTalukaDialog.setLayoutManager(mLayoutManager);
+
+        if (type.equalsIgnoreCase("d")) {
+            Log.e("dialogMAS", "call---" + type);
+
+            mTvDialogTitle.setText(R.string.distict);
+            Log.e("DistrictSizeMAS--", "" + listArrDistrict.size());
+            if (listArrDistrict.size() != 0) {
+                mDistrictAdapter = new DistrictAdapter(MyAccountScreen.this, listArrDistrict);
+                mRlDistrictTalukaDialog.setAdapter(mDistrictAdapter);
+            }
+        } else {
+            Log.e("dialogMAS", "call---" + type);
+
+            mTvDialogTitle.setText(R.string.taluka);
+            Log.e("TalukaSizeMAS--", "" + listArrTaluka.size());
+            if (listArrTaluka.size() != 0) {
+                mTalukaAdapter = new TalukaAdapter(MyAccountScreen.this, listArrTaluka);
+                mRlDistrictTalukaDialog.setAdapter(mTalukaAdapter);
+            }
+        }
+    }
 
     @Override
     public void onResult(JSONObject jobjWhole) {
@@ -241,10 +317,10 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
                         mFunctions.SetPrefUserImage(jObj.optString("image"));
 
                         Log.e("PREFMYACCPIC-",
-                                "userId-"+jObj.optInt("userId")+
-                                "fullName-"+jObj.optString("fullName")+
-                                "role-"+jObj.optString("role")+
-                                "image-"+jObj.optString("image"));
+                                "userId-" + jObj.optInt("userId") +
+                                        "fullName-" + jObj.optString("fullName") +
+                                        "role-" + jObj.optString("role") +
+                                        "image-" + jObj.optString("image"));
                         Functions.ToastUtility(MyAccountScreen.this, strMessage);
                         finish();
                     } else {
@@ -259,17 +335,40 @@ public class MyAccountScreen extends AppCompatActivity implements OnResult {
                         mFunctions.SetPrefUserImage(jObj.optString("image"));
 
                         Log.e("PREFPROFILE-",
-                                "userId-"+jObj.optInt("userId")+
-                                        "fullName-"+jObj.optString("fullName")+
-                                        "role-"+jObj.optString("role")+
-                                        "image-"+jObj.optString("image"));
+                                "userId-" + jObj.optInt("userId") +
+                                        "fullName-" + jObj.optString("fullName") +
+                                        "role-" + jObj.optString("role") +
+                                        "image-" + jObj.optString("image"));
                         Functions.ToastUtility(MyAccountScreen.this, strMessage);
                         finish();
                     } else {
                         Functions.ToastUtility(MyAccountScreen.this, strMessage);
                     }
+                } else if (strApi.equalsIgnoreCase("getDistrict")) {
+                    if (strStatus != 0) {
+                        JSONArray jArrayTextSub = jObj.getJSONArray("district");
+                        if (jArrayTextSub.length() > 0) {
+                            for (int i = 0; i < jArrayTextSub.length(); i++) {
+                                try {
+                                    JSONObject obj = jArrayTextSub.getJSONObject(i);
+                                    listArrDistrict.add(new District(
+                                            obj.optInt("disttrictId"),
+                                            obj.optString("disttrictName")
+                                    ));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        /*if (listArrDistrict.size() != 0) {
+                            mCalenderListAdapter= new CalenderAdapter(SignUpScreen.this, listArrDistrict);
+                            recyclerViewCalender.setAdapter(mCalenderListAdapter);
+                        }*/
+                        }
+                    } else {
+                        Functions.ToastUtility(MyAccountScreen.this, strMessage);
+                        //recyclerViewLanguage.setVisibility(View.GONE);
+                    }
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();

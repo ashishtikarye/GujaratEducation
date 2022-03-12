@@ -46,7 +46,7 @@ public class AppController extends Application {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
-                Toast.makeText(getApplicationContext(), "MobileAds Initialize Done ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "MobileAds Initialize Done ", Toast.LENGTH_LONG).show();
             }
         });
 

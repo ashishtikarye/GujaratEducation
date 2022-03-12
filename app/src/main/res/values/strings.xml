@@ -45,9 +45,16 @@
     <string name="student">Student</string>
     <string name="schoolname">School Name</string>
     <string name="taluka">Tal</string>
-    <string name="distict">Dist</string>
+    <string name="distict">District</string>
+
     <string name="termsandconditions">I agree with Your Terms and Conditions</string>
     <string name="register">Sign Up</string>
+
+
+    <string name="editpost">Edit This Post</string>
+    <string name="deletepost">Delete This Post</string>
+    <string name="reportpost">Report This Post</string>
+
 
     <string name="profile_hi_title">Hello, "</string>
     <string name="update_available">New Update Available</string>

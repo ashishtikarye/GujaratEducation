@@ -1,6 +1,8 @@
 package com.gujeducation.gujaratedu.Activity;
 
 
+import static com.gujeducation.gujaratedu.Helper.CommonMethod.ManageScreenView;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +13,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Helper.Functions;
@@ -30,8 +30,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.io.File;
 import java.util.List;
 
-import static com.gujeducation.gujaratedu.Helper.CommonMethod.ManageScreenView;
-
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -44,6 +42,7 @@ public class SplashScreen extends AppCompatActivity {
     boolean val_login;
     File apkStorage = null;
     private Intent intent;
+    private Context mcontext;
 
 
     @Override
@@ -59,6 +58,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ManageScreenView(this);
+        mcontext = this;
         mFunction = new Functions(this);
 
         //Log.e("PreferLangID", "----->" + mFunction.getPrefMediumId());
@@ -121,14 +121,45 @@ public class SplashScreen extends AppCompatActivity {
                     .onSameThread()
                     .check();
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void createDirectory() {
+
+        String release = Build.VERSION.RELEASE;
+        int sdkVersion = Build.VERSION.SDK_INT;
+        Log.e("Android SDK: ","sdkVersion--" + sdkVersion + " release--"+release);
+
+
+        File dir = getApplicationContext().getExternalFilesDir("AAADir");
+        if (dir == null) {
+            // One of the following paths are not accessible ¿unmounted internal memory?
+            //        /storage/emulated/0/Android/data/org.schabi.newpipe[.debug]/pending_downloads
+            //        /sdcard/Android/data/org.schabi.newpipe[.debug]/pending_downloads
+            Log.e("dir", "path to pending downloads are not accessible");
+        }else{
+            Log.e("dir", "accessible");
+
+        }
+        /*File wmediaStorageDir = new File(Environment.i.getExternalFilesDir("AAADir"));
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "AAADir");
+
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e("splashScrn", "failed to create directory");
+            }
+        }else{
+            Log.e("splashScrn", "directory created");
+
+        }*/
+    }
+
+
     public void countDownTimerStart() {
         //Log.e("USER_ID_splsh1", "Uid-->" + mFunction.getPrefUserId());
+        //createDirectory();
 
 
         final ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -193,5 +224,6 @@ public class SplashScreen extends AppCompatActivity {
             }
         }.start();
     }
+
 
 }

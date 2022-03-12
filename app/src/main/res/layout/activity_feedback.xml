@@ -73,18 +73,17 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvselectcategory"
-                android:fontFamily="@font/pop_bold"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
                 android:layout_toLeftOf="@+id/sp"
                 android:clickable="false"
+                android:fontFamily="@font/pop_bold"
                 android:gravity="center_vertical"
                 android:hint="Tap to Select Category"
                 android:textColor="@color/grey_text"
-                android:textSize="@dimen/_12sdp"
-                />
+                android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/sp"
@@ -99,10 +98,12 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etfullname"
-            fontPath="Quicksand-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginLeft="@dimen/_12sdp"
+            android:editable="false"
+            android:enabled="false"
+            android:fontFamily="@font/pop_bold"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_12sdp"
             android:background="@drawable/xml_square_border_lowradius"
@@ -111,16 +112,17 @@
             android:paddingRight="@dimen/_12sdp"
             android:singleLine="true"
             android:textColor="@color/grey_text"
-            android:textSize="@dimen/_12sdp"
-            tools:ignore="MissingPrefix" />
+            android:textSize="@dimen/_12sdp"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etschoolname"
-            fontPath="Quicksand-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginLeft="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:editable="false"
+            android:enabled="false"
+            android:fontFamily="@font/pop_bold"
             android:layout_marginRight="@dimen/_12sdp"
             android:background="@drawable/xml_square_border_lowradius"
             android:gravity="center_vertical"
@@ -128,17 +130,18 @@
             android:paddingRight="@dimen/_12sdp"
             android:singleLine="true"
             android:textColor="@color/grey_text"
-            android:textSize="@dimen/_12sdp"
-            tools:ignore="MissingPrefix" />
+            android:textSize="@dimen/_12sdp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etemailid"
-            fontPath="Quicksand-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginLeft="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_12sdp"
+            android:editable="false"
+            android:enabled="false"
+            android:fontFamily="@font/pop_bold"
             android:background="@drawable/xml_square_border_lowradius"
             android:gravity="center_vertical"
             android:inputType="textEmailAddress"
@@ -146,12 +149,10 @@
             android:paddingRight="@dimen/_12sdp"
             android:singleLine="true"
             android:textColor="@color/grey_text"
-            android:textSize="@dimen/_12sdp"
-            tools:ignore="MissingPrefix" />
+            android:textSize="@dimen/_12sdp"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etmobilno"
-            fontPath="Quicksand-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginLeft="@dimen/_12sdp"
@@ -160,18 +161,19 @@
             android:background="@drawable/xml_square_border_lowradius"
             android:gravity="center_vertical"
             android:inputType="phone"
+            android:editable="false"
+            android:enabled="false"
             android:maxLength="10"
             android:paddingLeft="@dimen/_12sdp"
             android:paddingRight="@dimen/_12sdp"
             android:singleLine="true"
             android:textColor="@color/grey_text"
             android:textSize="@dimen/_12sdp"
-            tools:ignore="MissingPrefix" />
+            android:fontFamily="@font/pop_bold" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etfeedback"
-            fontPath="Quicksand-Bold.ttf"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:layout_marginLeft="@dimen/_12sdp"
@@ -186,8 +188,7 @@
             android:paddingLeft="@dimen/_12sdp"
             android:paddingRight="@dimen/_12sdp"
             android:textColor="@color/grey_text"
-            android:textSize="@dimen/_12sdp"
-            tools:ignore="MissingPrefix" />
+            android:textSize="@dimen/_12sdp"/>
 
 
         <RatingBar

@@ -11,7 +11,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -34,6 +37,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.gujeducation.BuildConfig;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Helper.Connection;
 import com.gujeducation.gujaratedu.Helper.Functions;
@@ -72,23 +76,21 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
     // private final ArrayList<Post> listArrPost = new ArrayList<Post>();
     private final ArrayList<YoutubeVideo> listYoutubeVideo = new ArrayList<YoutubeVideo>();
-    private final ArrayList<LikeCount> listlikeCount = new ArrayList<LikeCount>();
     public ProgressDialog progressD;
     String likeCount = "";
     LinearLayout btnCreatePost;
     RecyclerView recyclerviewPost;
     LinearLayoutManager mLayoutManager;
-    //PostAdapter mPostAdapter;
-    //YoutubeRecyclerAdapter mYoutubeRecyclerAdapter;
     PostUtubeAdapter mPostUtubeAdapter;
     Functions mFunctions;
     Intent intent;
     RelativeLayout.LayoutParams layoutParams;
     File imgFile = null;
-    AppCompatImageView ivPostImg, ivPdfIcon, mIvBack;
-    AppCompatTextView tvPdfName, mTvUsername, mTvLikeCount;
+    AppCompatImageView ivPostImg, ivPdfIcon, mIvBack;//, mIvOption;
+    AppCompatTextView tvPdfName, mTvUsername, mTvLikeCount, mTvCreatePost;
     CircleImageView mIvUserPic;
-    int flag = 0;
+    int flag = 0, myPostId;
+    boolean isUpdate = false;
     AppCompatImageView mIvCloseDialog;
     Dialog dialogPost;
     AppCompatEditText edtPostTitle, edtYoutubeLink;
@@ -99,7 +101,6 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
     AdView mAdView;
     RadioGroup rdoGrpUpload;
     RadioButton rdoYoutube, rdoImage;
-    //String userImage = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,7 +142,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
 
         if (Functions.knowInternetOn(this)) {
-            APIs.getEducationCornerList(EducationCornerScreen.this, this);
+            APIs.getEducationCornerList(EducationCornerScreen.this, this, mFunctions.getPrefUserId());
         } else {
             Functions.showInternetAlert(this);
         }
@@ -152,7 +153,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
             public void onClick(View v) {
                 //intent = new Intent(EducationCornerScreen.this,CreatePostScreen.class);
                 //startActivity(intent);
-                showPostDialog();
+                showPostDialog("create", 0, mFunctions.getPrefUserId(), "", "", "");
             }
         });
 
@@ -161,7 +162,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
     public void CallDoLike(int postId) {
         try {
-            Log.e("CallDoLike", "PrefUserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
+            Log.e("api", "Like-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
             APIs.doLikePost(this, this, mFunctions.getPrefUserId(), postId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,15 +171,35 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
     public void CallDoDisLike(int postId) {
         try {
-            Log.e("CallDoDisLike", "PrefUserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
+            Log.e("api", "DisLike-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
             APIs.doDislikePost(this, this, mFunctions.getPrefUserId(), postId);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        menu.setHeaderTitle("Select The Action");
+    }
 
-    public void showPostDialog() {
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.edit) {
+            Toast.makeText(getApplicationContext(), "edit code", Toast.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.delete) {
+            Toast.makeText(getApplicationContext(), "delete code", Toast.LENGTH_LONG).show();
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public void showPostDialog(final String action, final int postId, final int userId, final String title,
+                               final String image, final String youtubeLink) {
 
         dialogPost = new Dialog(
                 this, R.style.popupTheme);
@@ -191,6 +212,10 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         dialogPost.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogPost.show();
 
+        mTvCreatePost = view.findViewById(R.id.tvcreatepost);
+        btnAddPost = view.findViewById(R.id.btn_add_post);
+
+
         mIvUserPic = view.findViewById(R.id.iv_user_profile);
         mTvUsername = view.findViewById(R.id.tv_user_name);
         mTvUsername.setText(mFunctions.getPrefUserName());
@@ -201,7 +226,6 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         btnAddImage.setVisibility(View.GONE);
         btnAddPDF = view.findViewById(R.id.btn_add_pdf);
         btnAddPDF.setVisibility(View.GONE);
-        btnAddPost = view.findViewById(R.id.btn_add_post);
         optionLayout = view.findViewById(R.id.ll_options);
         ivPostImg = view.findViewById(R.id.iv_image);
         tvPdfName = view.findViewById(R.id.tv_pdf_name);
@@ -215,7 +239,40 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
        /* rdoYoutube.setOnCheckedChangeListener(new Radio_check());
         rdoImage.setOnCheckedChangeListener(new Radio_check());*/
+        if (action.equalsIgnoreCase("create")) {
+            mTvCreatePost.setText("Create Post");
+        } else {
+            myPostId = postId;
+            isUpdate = true;
+            Log.e("myPostId1", "" + myPostId);
+            mTvCreatePost.setText("Update Post");
+            edtPostTitle.setText(title);
+            if (!youtubeLink.equalsIgnoreCase("NA")) {
+                rdoImage.setChecked(false);
+                rdoYoutube.setChecked(true);
+                edtYoutubeLink.setVisibility(View.VISIBLE);
+                edtYoutubeLink.setText(youtubeLink);
+            }
 
+            if (!image.equalsIgnoreCase("NA")) {
+
+                mLlAttachment.setVisibility(View.VISIBLE);
+                ivPostImg.setVisibility(View.VISIBLE);
+                showPdfLayout.setVisibility(View.GONE);
+
+                try {
+                    Log.e("serverImage", "-->" + mFunctions.getPrefUserImage());
+                    Glide.with(this).load(image)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .priority(Priority.HIGH).dontAnimate()
+                            .into(ivPostImg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
 
         try {
             Log.e("userImage", "-->" + mFunctions.getPrefUserImage());
@@ -258,25 +315,6 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         });
 
 
-        /*btnAddImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(EducationCornerScreen.this, ImagePickActivity.class);
-                intent.putExtra(Constant.MAX_NUMBER, 1);
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_IMAGE);
-            }
-        });*/
-
-        /*btnAddPDF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(EducationCornerScreen.this, NormalFilePickActivity.class);
-                intent.putExtra(Constant.MAX_NUMBER, 1);
-                intent.putExtra(NormalFilePickActivity.SUFFIX, new String[]{"pdf"});
-                startActivityForResult(intent, Constant.REQUEST_CODE_PICK_FILE);
-            }
-        });*/
-
         btnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -291,8 +329,15 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                         if (!tvPdfName.getText().toString().isEmpty()) {
                             if (edtPostTitle.getText().length() != 0) {
                                 Log.e("pdfFile", "--->" + imgFile.toString());
-                                new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
-                                        edtPostTitle.getText().toString());
+                                Log.e("myPostId2", "--->" + myPostId);
+
+                                if (isUpdate) {
+                                    new EducationCornerScreen.uploadUpdateImageTask().execute(imgFile.toString(),
+                                            edtPostTitle.getText().toString());
+                                } else {
+                                    new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
+                                            edtPostTitle.getText().toString());
+                                }
                             } else {
                                 Functions.ToastUtility(EducationCornerScreen.this,
                                         "You must fill in What's your mind...!!");
@@ -321,8 +366,20 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                         if (edtPostTitle.getText().length() != 0) {
                             Log.e("ivpostimg", "call code for upload");
                             Log.e("imgfile", "--->" + imgFile.toString());
-                            new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
-                                    edtPostTitle.getText().toString());
+                            Log.e("myPostId3", "--->" + myPostId);
+
+                            if (isUpdate) {
+                                new EducationCornerScreen.uploadUpdateImageTask().execute(imgFile.toString(),
+                                        edtPostTitle.getText().toString());
+                            } else {
+                                new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
+                                        edtPostTitle.getText().toString());
+                            }
+
+
+
+                            /*new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
+                                    edtPostTitle.getText().toString());*/
                         } else {
                             Functions.ToastUtility(EducationCornerScreen.this,
                                     "You must fill in What's your mind...!!");
@@ -333,38 +390,6 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                     }
 
 
-
-
-
-
-                    /*if (edtPostTitle.getText().length() == 0) {
-                        Toast.makeText(EducationCornerScreen.this, "You must fill in What's your mind...!", Toast.LENGTH_SHORT).show();
-                    } else if ((edtYoutubeLink.getText().toString().isEmpty()) && (ivPostImg.getDrawable() == null) && (tvPdfName.getText().toString().isEmpty())) {
-                        Toast.makeText(EducationCornerScreen.this, "Please fill youtube link or select image or pdf file...!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (!edtYoutubeLink.getText().toString().isEmpty()) {
-                            if (edtPostTitle.getText().length() == 0) {
-                                Toast.makeText(EducationCornerScreen.this, "You must fill in What's your mind...!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Log.e("imgfile", "--->" + imgFile.toString());
-                                new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(),
-                                        edtPostTitle.getText().toString());
-                            }
-                        }
-                        if (ivPostImg.getDrawable() != null) {
-                            if (edtPostTitle.getText().length() == 0) {
-                                Toast.makeText(EducationCornerScreen.this, "You must fill in What's your mind...!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(), edtPostTitle.getText().toString());
-                            }
-                        } else if (!tvPdfName.getText().toString().isEmpty()) {
-                            if (edtPostTitle.getText().length() == 0) {
-                                Toast.makeText(EducationCornerScreen.this, "You must fill in What's your mind...!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                new EducationCornerScreen.uploadImageTask().execute(imgFile.toString(), edtPostTitle.getText().toString());
-                            }
-                        }
-                    }*/
                 } catch (Exception e) {
                     e.printStackTrace();
                     //Toast.makeText(CreatePostScreen.this, "Please fill properly...!", Toast.LENGTH_SHORT).show();
@@ -453,6 +478,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                                             obj.optString("image"),
                                             obj.optString("pdf"),
                                             obj.optString("youtubeLink"),
+                                            obj.optString("datetime"),
                                             obj.optString("like_count"),
                                             obj.optString("fullname"),
                                             obj.optString("schoolName"),
@@ -634,8 +660,94 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         }
     }
 
+    class uploadUpdateImageTask extends AsyncTask<String, Void, String> {
+        String response_str = "";
 
-    public class PostUtubeAdapter extends RecyclerView.Adapter<PostUtubeAdapter.MyViewHolder> {
+        @Override
+        protected void onPreExecute() {
+            progressD = new ProgressDialog(EducationCornerScreen.this);
+            progressD.setMessage("Uploading..Please wait..!!!");
+            progressD.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            File file1 = new File(strings[0]);
+            try {
+                //qLog.e("data","--------"+strings[0]);
+                HttpClient client = new DefaultHttpClient();
+                HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
+                HttpResponse response;
+                try {
+                    HttpPost post = new HttpPost("http://gujarateducation.org/android_api/postUploadUpdate.php");
+                    MultipartEntity reqEntity = new MultipartEntity();
+                    FileBody cbFile = new FileBody(file1);
+                    Log.e("title:-----", "" + strings[1]);
+                    Log.e("myPostId4:-----", "" + myPostId);
+                    reqEntity.addPart("file", cbFile);
+                    //Log.e("UserId", "" + mFunctions.getPrefUserId());
+                    reqEntity.addPart("userId", new StringBody("" + mFunctions.getPrefUserId()));
+                    reqEntity.addPart("title", new StringBody("" + strings[1]));
+                    reqEntity.addPart("postId", new StringBody("" + myPostId));
+
+                    post.setEntity(reqEntity);
+                    response = client.execute(post);
+                    if (response != null) {
+                        response_str = EntityUtils.toString(response.getEntity());
+                        //Log.e("response_strrr", response_str);
+                        //progressD.dismiss();
+                    } else {
+                        Log.e("responseUpdt", "-->" + response_str);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            progressD.dismiss();
+            try {
+                if (progressD.isShowing()) {
+                    progressD.dismiss();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                progressD.dismiss();
+            }
+            try {
+                result = response_str;
+                Log.e("ResultHere", "--->" + result);
+                //progressD.dismiss();
+                if (result != null) {
+                    edtPostTitle.setText("");
+                    ivPostImg.setVisibility(View.GONE);
+                    ivPostImg.setImageDrawable(null);
+                    ivPdfIcon.setVisibility(View.GONE);
+                    tvPdfName.setText("");
+                    tvPdfName.setVisibility(View.GONE);
+                    //    Functions.ToastUtility(EducationCornerScreen.this, "Upload Successfully.");
+                    dialogPost.dismiss();
+                    intent = new Intent(EducationCornerScreen.this, EducationCornerScreen.class);
+                    startActivity(intent);
+                    finishAffinity();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public class PostUtubeAdapter extends RecyclerView.Adapter<PostUtubeAdapter.MyViewHolder> implements OnResult {
         private final AppCompatActivity activity;
         public boolean error = false;
         ArrayList<YoutubeVideo> listPostUtube = new ArrayList();
@@ -643,12 +755,12 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         Functions mFunction;
         String videoCode;
         String strVideoCode;
-        Dialog dialogPopup;
-        AppCompatImageView mIvPopupImage, mIvClose;
+        Dialog dialogPopup, dialogPost;
+        AppCompatImageView mIvPopupImage, mIvClosePost, mIvClose;
+        LinearLayout mLlEditPost, mLlDeletePost, mLlReportPost;
         String userImage = "";
         int likeStatus;
-        Boolean isLikeAdd, flaglike;
-        int chklike = 0;
+        int myPosition = 0;
         private int mNumColumns = 0;
 
 
@@ -669,7 +781,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
             mFunction = new Functions(activity);
             final YoutubeVideo utubeList = listPostUtube.get(position);
 //        final LikeCount likeList = listLikeCount.get(position);
-            //menuItemHolder.mIvLike.setTag(R.string.position, position);
+            menuItemHolder.mIvLike.setTag(R.string.position, position);
 
 
             try {
@@ -682,10 +794,14 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                     public void onClick(View view) {
                         Log.e("position", "===>" + position);
                         Log.e("postID", "===>" + utubeList.getPostId());
+                        Log.e("api", "likeStatussss--" + likeStatus);
+
                     }
                 });
 
+
                 //Log.e("likeCount", "adp--" + utubeList.getLike_count());
+                menuItemHolder.mTvDateTime.setText(utubeList.getDatetime());
                 mTvLikeCount.setText(utubeList.getLike_count());
                 menuItemHolder.mTvFullName.setText(utubeList.getFullname());
                 menuItemHolder.mTvSchoolName.setText(utubeList.getSchoolname());
@@ -709,19 +825,52 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
 
                 likeStatus = Integer.valueOf(listPostUtube.get(position).getLike());
+                Log.e("api", "likeStatus--" + likeStatus);
 
                 if (likeStatus == 1) {
-                    flaglike = true;
-                    isLikeAdd = true;
-                    Log.e("likeStatus is one", "" + isLikeAdd);
+                    utubeList.setActive(true);
+                    Log.e("api", "likeStatus is true");
                     //   menuItemHolder.mIvLike.setImageResource(R.drawable.ic_like);
                 } else {
-                    flaglike = true;
-                    isLikeAdd = false;
-                    Log.e("likeStatus  is zero", "" + isLikeAdd);
+                    utubeList.setActive(false);
+                    Log.e("api", "likeStatus is false");
                     //menuItemHolder.mIvLike.setImageResource(R.drawable.ic_like);
                 }
 
+
+                menuItemHolder.mIvLike.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.e("api", "statusActiveOrNot--" + utubeList.isActive());
+                        if (utubeList.isActive()) {
+                            Log.e("api", "call dislike");
+                            ((EducationCornerScreen) activity).CallDoDisLike(utubeList.getPostId());
+                        } else {
+                            Log.e("api", "call like");
+                            ((EducationCornerScreen) activity).CallDoLike(utubeList.getPostId());
+                        }
+                        notifyItemChanged(position);
+/*
+
+
+                    if (utubeList.isActive()) {
+                        Log.e("RemoveWishlistAPI", "--" + isLikeAdd + utubeList.getPostId());
+                        utubeList.setActive(false);
+                        ((EducationCornerScreen) activity).CallDoDisLike(utubeList.getPostId());
+                    } else {
+                        Log.e("AddWishlistAPI", "--" + isLikeAdd + utubeList.getPostId());
+                        utubeList.setActive(true);
+                        ((EducationCornerScreen) activity).CallDoLike(utubeList.getPostId());
+                    }
+                    Log.e("position", "position--" + position);
+                    //mTvLikeCount.setText(likeCount);
+                    notifyItemChanged(position);
+                    //notifyDataSetChanged();
+*/
+
+
+                    }
+                });
 
                 /*if (isLikeAdd) {
                     //Log.e("isWishlistAdd", "status is true->" + isWishlistAdd);
@@ -807,30 +956,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                 }), true);
             });
 
-            menuItemHolder.mIvLike.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                    flaglike = true;
-                    chklike = 1;
-
-                    if (utubeList.isActive()) {
-                        Log.e("RemoveWishlistAPI", "--" + isLikeAdd + utubeList.getPostId());
-                        utubeList.setActive(false);
-                        ((EducationCornerScreen) activity).CallDoDisLike(utubeList.getPostId());
-                    } else {
-                        Log.e("AddWishlistAPI", "--" + isLikeAdd + utubeList.getPostId());
-                        utubeList.setActive(true);
-                        ((EducationCornerScreen) activity).CallDoLike(utubeList.getPostId());
-                    }
-                    Log.e("position", "position--" + position);
-                    // mTvLikeCount.setText(likeCount);
-                    notifyItemChanged(position);
-                    //notifyDataSetChanged();
-
-
-                }
-            });
 
 
             /*if (flaglike == true) {
@@ -856,15 +982,90 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
             }*/
 
 
-            holder.mIvOption.setOnClickListener(new View.OnClickListener() {
+            menuItemHolder.mIvShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(activity, "mIvOption", Toast.LENGTH_SHORT).show();
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT,
+                            utubeList.getTitle()+"\n\nHey check out learning app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+                }
+            });
 
+            //mIvOption.setOnClickListener(new View.OnClickListener() {
+            menuItemHolder.mIvOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //  registerForContextMenu(view);
+
+                    myPosition = position;
+                    Log.e("mIvOPTIONn", "postId-->" + utubeList.getPostId() +
+                            " prefUserId-->" + mFunctions.getPrefUserId() +
+                            " position-" + position +
+                            " myPosition-" + myPosition);
+                    callApi(utubeList.getPostId(), mFunctions.getPrefUserId());
+                   /* PopupMenu popup = new PopupMenu(activity, view);
+                    MenuInflater inflater = popup.getMenuInflater();
+                    inflater.inflate(R.menu.menu_main, popup.getMenu());
+
+                 //   if(utubeList)
+
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.edit:
+                                    Toast.makeText(activity, "Edit", Toast.LENGTH_SHORT).show();
+                                    return true;
+                                case R.id.delete:
+                                    Toast.makeText(activity, "Delete", Toast.LENGTH_SHORT).show();
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                    popup.show();*/
                 }
             });
 
 
+        }
+
+
+        private void callApi(int postId, int userId) {
+            if (Functions.knowInternetOn(activity)) {
+                APIs.checkEditDelReport(activity, this, userId, postId);
+            } else {
+                Functions.showInternetAlert(activity);
+            }
+        }
+
+        private void callGetPostApi(int postId, int userId) {
+            if (Functions.knowInternetOn(activity)) {
+                APIs.getPostInfo(activity, this, userId, postId);
+            } else {
+                Functions.showInternetAlert(activity);
+            }
+        }
+
+        private void callDeletePostApi(int postId, int userId) {
+            if (Functions.knowInternetOn(activity)) {
+                APIs.deletePost(activity, this, userId, postId);
+            } else {
+                Functions.showInternetAlert(activity);
+            }
+        }
+
+
+        private void callReportPostApi(int postId) {
+            if (Functions.knowInternetOn(activity)) {
+                APIs.reportPost(activity, this, postId);
+            } else {
+                Functions.showInternetAlert(activity);
+            }
         }
 
         public void updateData(ArrayList<YoutubeVideo> viewModels) {
@@ -918,6 +1119,71 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
         }
 
+        public void showPopupEditDeleteReport(final int flag, final int postId) {
+
+            dialogPost = new Dialog(
+                    activity, R.style.popupTheme);
+            LayoutInflater inflater = (LayoutInflater)
+                    activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.popup_editdelreprt, null);
+            dialogPost.setContentView(view); // your custom view.
+            dialogPost.setCancelable(true);
+            dialogPost.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            dialogPost.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+            dialogPost.show();
+
+
+            mLlEditPost = view.findViewById(R.id.lveditpost);
+            mLlDeletePost = view.findViewById(R.id.lvdeletepost);
+            mLlReportPost = view.findViewById(R.id.lvreportpost);
+            mIvClosePost = view.findViewById(R.id.ivclosepost);
+            //flag = 1 edit/delete
+            //flag = 2 report
+            if (flag == 1) {
+                mLlEditPost.setVisibility(View.VISIBLE);
+                mLlDeletePost.setVisibility(View.VISIBLE);
+                mLlReportPost.setVisibility(View.GONE);
+            } else {
+                mLlEditPost.setVisibility(View.GONE);
+                mLlDeletePost.setVisibility(View.GONE);
+                mLlReportPost.setVisibility(View.VISIBLE);
+            }
+
+
+            mLlDeletePost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callDeletePostApi(postId, mFunctions.getPrefUserId());
+                    dialogPost.dismiss();
+                }
+            });
+
+            mLlEditPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callGetPostApi(postId, mFunctions.getPrefUserId());
+                    dialogPost.dismiss();
+                }
+            });
+
+            mLlReportPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callReportPostApi(postId);
+                    dialogPost.dismiss();
+                }
+            });
+
+            mIvClosePost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialogPost.dismiss();
+                }
+            });
+
+
+        }
+
         public String extractYoutubeCode(String url) throws MalformedURLException {
             String query = new URL(url).getQuery();
             String[] param = query.split("&");
@@ -949,10 +1215,54 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
             this.mNumColumns = numColumns;
         }
 
+        @Override
+        public void onResult(JSONObject jobjWhole) {
+            try {
+                if (jobjWhole != null) {
+                    JSONObject jObj = jobjWhole.optJSONObject(Connection.TAG_DATA);
+                    int strStatus = jObj.optInt("success");
+                    int flgEditDel = jObj.optInt("flagEdtDel");
+                    int postId = jObj.optInt("postId");
+                    String strMessage = jObj.optString("message");
+                    String strApi = jObj.optString("api");
+
+                    if (strApi.equalsIgnoreCase("checkEditDelReport")) {
+                        if (flgEditDel == 1) {
+                            showPopupEditDeleteReport(1, postId);//allow edit del
+                        } else {
+                            showPopupEditDeleteReport(2, postId);//allow report
+                        }
+                    } else if (strApi.equalsIgnoreCase("getPostInfo")) {
+                        if (strStatus == 1) {
+                            jObj.optInt("postId");
+                            jObj.optInt("userId");
+                            jObj.optString("title");
+                            jObj.optString("image");
+                            jObj.optString("youtubeLink");
+                            showPostDialog("update", jObj.optInt("postId"), jObj.optInt("userId"),
+                                    jObj.optString("title"), jObj.optString("image"), jObj.optString("youtubeLink"));
+
+                        }
+                    } else if (strApi.equalsIgnoreCase("deletePost")) {
+                        Functions.ToastUtility(activity, strMessage);
+                        notifyItemRemoved(myPosition);
+
+                    } else if (strApi.equalsIgnoreCase("reportPost")) {
+                        Functions.ToastUtility(activity, strMessage);
+                        notifyItemRemoved(myPosition);
+
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            AppCompatTextView mTvFullName, mTvUserType, mTvSchoolName, mTvTitle;
-            AppCompatImageView mIvThumbnail, mIvDownload, mIvShare, mIvLike, mIvOption;//,mIvDislike;
+            AppCompatTextView mTvFullName, mTvUserType, mTvSchoolName, mTvTitle, mTvDateTime;
+            AppCompatImageView mIvThumbnail, mIvOption, mIvShare, mIvLike;//,mIvDislike;
             AppCompatImageView playButton;
             YouTubePlayerView youTubePlayerView;
             CircleImageView mIvUserPic;
@@ -965,6 +1275,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                 mTvTitle = itemView.findViewById(R.id.tvtopicname);
                 mIvThumbnail = itemView.findViewById(R.id.ivthumbnail);
                 mTvLikeCount = itemView.findViewById(R.id.likeCount);
+                mTvDateTime = itemView.findViewById(R.id.tvdatetime);
                 playButton = itemView.findViewById(R.id.btnPlay);
                 youTubePlayerView = itemView.findViewById(R.id.youtubeView);
                 mIvUserPic = itemView.findViewById(R.id.ivuser);

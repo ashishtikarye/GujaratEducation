@@ -1,6 +1,8 @@
 package com.gujeducation.gujaratedu.Activity;
 
 
+import static com.gujeducation.gujaratedu.Helper.Functions.isEmptyEdittext;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,33 +18,51 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gujeducation.R;
+import com.gujeducation.gujaratedu.Adapter.DistrictAdapter;
+import com.gujeducation.gujaratedu.Adapter.TalukaAdapter;
 import com.gujeducation.gujaratedu.Helper.Connection;
 import com.gujeducation.gujaratedu.Helper.Functions;
 import com.gujeducation.gujaratedu.Interface.OnResult;
+import com.gujeducation.gujaratedu.Model.District;
+import com.gujeducation.gujaratedu.Model.Taluka;
 import com.gujeducation.gujaratedu.ServerAPIs.APIs;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.gujeducation.gujaratedu.Helper.Functions.isEmptyEdittext;
+import java.util.ArrayList;
 
 
 public class SignUpScreen extends AppCompatActivity implements OnResult {
 
+    public static Dialog dialogDistTaluka;
     private final String[] RoleData = {String.valueOf(R.string.sellect_role),
             String.valueOf(R.string.student),
             String.valueOf(R.string.teacher)};
+    private final ArrayList<District> listArrDistrict = new ArrayList<District>();
+    public ArrayList<Taluka> listArrTaluka = new ArrayList<Taluka>();
+
     AppCompatButton btnSignUp;
     Functions mFunction;
     String UserName, EmailId, MobileNo, LoginWith;
     int UserId;
-    EditText mEdFullName, mEdEmailId, mEdPassword, mEdMobileNo, mEdSchoolName, mEdTal, mEdDist;
+    EditText mEdFullName, mEdEmailId, mEdPassword, mEdMobileNo, mEdSchoolName;
+    public EditText mEdDist,mEdTal;
     TextView mTvRole;
     AppCompatCheckBox mChkAgree;
     String role;
     Dialog dialogType;
-    AppCompatTextView mTvStudent, mTvTeacher;
+
+    AppCompatTextView mTvStudent, mTvTeacher, mTvDialogTitle;
+    DistrictAdapter mDistrictAdapter;
+    TalukaAdapter mTalukaAdapter;
+    RecyclerView mRlDistrictTalukaDialog;
+    LinearLayoutManager mLayoutManager;
     private Context mcontext;
 
     @Override
@@ -87,6 +107,22 @@ public class SignUpScreen extends AppCompatActivity implements OnResult {
                 showTypePopup();
             }
         });
+
+
+        if (Functions.knowInternetOn(this)) {
+            APIs.getDistrictList(this, this, mFunction.getPrefMediumId());
+        } else {
+            Functions.showInternetAlert(this);
+        }
+
+        mEdDist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDistrictTalukaPopup("d");
+            }
+        });
+
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,30 +211,105 @@ public class SignUpScreen extends AppCompatActivity implements OnResult {
 
     }
 
+
+    public void showDistrictTalukaPopup(String type) {
+
+        dialogDistTaluka = new Dialog(
+                this, R.style.popupTheme);
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_district_taluka_list, null);
+        dialogDistTaluka.setContentView(view); // your custom view.
+        dialogDistTaluka.setCancelable(true);
+        dialogDistTaluka.getWindow().setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialogDistTaluka.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogDistTaluka.show();
+        mTvDialogTitle = (AppCompatTextView) view.findViewById(R.id.tv_dialogtitle);
+        mRlDistrictTalukaDialog = (RecyclerView) view.findViewById(R.id.recyclerview_distal);
+
+
+        mLayoutManager = new LinearLayoutManager(this);
+
+        mRlDistrictTalukaDialog.setHasFixedSize(true);
+        mRlDistrictTalukaDialog.setLayoutManager(mLayoutManager);
+
+        if (type.equalsIgnoreCase("d")) {
+            Log.e("dialog","call---"+type);
+
+            mTvDialogTitle.setText(R.string.distict);
+            Log.e("DistrictSize--", "" + listArrDistrict.size());
+            if (listArrDistrict.size() != 0) {
+                mDistrictAdapter = new DistrictAdapter(SignUpScreen.this, listArrDistrict);
+                mRlDistrictTalukaDialog.setAdapter(mDistrictAdapter);
+            }
+        } else {
+            Log.e("dialog","call---"+type);
+
+            mTvDialogTitle.setText(R.string.taluka);
+            Log.e("TalukaSize--", "" + listArrTaluka.size());
+            if (listArrTaluka.size() != 0) {
+                mTalukaAdapter = new TalukaAdapter(SignUpScreen.this, listArrTaluka);
+                mRlDistrictTalukaDialog.setAdapter(mTalukaAdapter);
+            }
+        }
+    }
+
     @Override
     public void onResult(JSONObject jobjWhole) {
-        JSONObject jObj = jobjWhole.optJSONObject(Connection.TAG_DATA);
-        if (jObj != null) {
-            String strApiName = jObj.optString("APIName");
-            int strStatus = jObj.optInt("success");
-            String strMessage = jObj.optString("message");
-            UserId = jObj.optInt("userId");
-            UserName = jObj.optString("fullname");
-            Log.e("signup-", "UserName-->" + UserName + " UserId-->" + UserId);
-            Functions.ToastUtility(SignUpScreen.this, strMessage);
-            if (strStatus == 1) {
-                Log.e("signupppp-", "UserName-->" + UserName + " UserId-->" + UserId);
-                Intent intent = new Intent(SignUpScreen.this, VerifyOTPScreen.class);
-                intent.putExtra("userId", UserId);
-                intent.putExtra("userName", UserName);
-                intent.putExtra("mobileNo", MobileNo);
-                startActivity(intent);
-                finishAffinity();
-            } else if (strStatus == 2) {
+        try {
+            JSONObject jObj = jobjWhole.optJSONObject(Connection.TAG_DATA);
+            if (jObj != null) {
+                String strApiName = jObj.optString("APIName");
+                int strStatus = jObj.optInt("success");
+                String strMessage = jObj.optString("message");
                 Functions.ToastUtility(SignUpScreen.this, strMessage);
-            } else {
-                Functions.ToastUtility(SignUpScreen.this, strMessage);
+                if (strApiName.equalsIgnoreCase("getDistrict")) {
+                    if (strStatus != 0) {
+                        JSONArray jArrayTextSub = jObj.getJSONArray("district");
+                        if (jArrayTextSub.length() > 0) {
+                            for (int i = 0; i < jArrayTextSub.length(); i++) {
+                                try {
+                                    JSONObject obj = jArrayTextSub.getJSONObject(i);
+                                    listArrDistrict.add(new District(
+                                            obj.optInt("disttrictId"),
+                                            obj.optString("disttrictName")
+                                    ));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        /*if (listArrDistrict.size() != 0) {
+                            mCalenderListAdapter= new CalenderAdapter(SignUpScreen.this, listArrDistrict);
+                            recyclerViewCalender.setAdapter(mCalenderListAdapter);
+                        }*/
+                        }
+                    } else {
+                        Functions.ToastUtility(SignUpScreen.this, strMessage);
+                        //recyclerViewLanguage.setVisibility(View.GONE);
+                    }
+                } else if (strApiName.equalsIgnoreCase("Signup")) {
+                    UserId = jObj.optInt("userId");
+                    UserName = jObj.optString("fullname");
+                    Log.e("signup-", "UserName-->" + UserName + " UserId-->" + UserId);
+                    Functions.ToastUtility(SignUpScreen.this, strMessage);
+                    if (strStatus == 1) {
+                        Log.e("signupppp-", "UserName-->" + UserName + " UserId-->" + UserId);
+                        Intent intent = new Intent(SignUpScreen.this, VerifyOTPScreen.class);
+                        intent.putExtra("userId", UserId);
+                        intent.putExtra("userName", UserName);
+                        intent.putExtra("mobileNo", MobileNo);
+                        startActivity(intent);
+                        finishAffinity();
+                    } else if (strStatus == 2) {
+                        Functions.ToastUtility(SignUpScreen.this, strMessage);
+                    } else {
+                        Functions.ToastUtility(SignUpScreen.this, strMessage);
+                    }
+                }
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

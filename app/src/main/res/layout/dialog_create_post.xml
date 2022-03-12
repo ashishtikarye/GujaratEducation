@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:fontFamily="@font/pop_semibold"
-                android:text="Create Post"
+                android:text="My Post"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp" />
 

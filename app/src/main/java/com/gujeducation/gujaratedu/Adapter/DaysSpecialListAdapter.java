@@ -1,9 +1,11 @@
 package com.gujeducation.gujaratedu.Adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -14,10 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.LoadAdError;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Activity.DaysSpecialDescription;
 import com.gujeducation.gujaratedu.Activity.DaysSpecialScreen;
+import com.gujeducation.gujaratedu.Activity.NewsCircularScreen;
+import com.gujeducation.gujaratedu.Activity.PdfScreen;
 import com.gujeducation.gujaratedu.Helper.Functions;
+import com.gujeducation.gujaratedu.Helper.ProgressLoadingView;
 import com.gujeducation.gujaratedu.Model.DaySpecial;
 
 import java.util.ArrayList;
@@ -30,6 +37,7 @@ public class DaysSpecialListAdapter extends RecyclerView.Adapter<DaysSpecialList
     Functions mFunction;
     Intent intent;
     private int mNumColumns = 0;
+    ProgressLoadingView mView = null;
 
     public DaysSpecialListAdapter(AppCompatActivity activity, ArrayList<DaySpecial> listDaysSpecial) {
         this.activity = activity;
@@ -64,13 +72,97 @@ public class DaysSpecialListAdapter extends RecyclerView.Adapter<DaysSpecialList
         holder.btnSee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DaysSpecialScreen) activity).showInterstitialAd();
-                intent = new Intent(activity, DaysSpecialDescription.class);
-                intent.putExtra("title", daysList.getTitle());
-                intent.putExtra("subtitle", daysList.getSubtitle());
-                intent.putExtra("description", daysList.getDescription());
-                intent.putExtra("image", daysList.getImage());
-                activity.startActivity(intent);
+
+
+                ((DaysSpecialScreen) activity).loadInterstitialAd();
+
+                mView = new ProgressLoadingView();
+                mView.show(activity.getSupportFragmentManager(), "load");
+
+
+                ((DaysSpecialScreen) activity).interstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+
+                        // Showing a simple Toast message to user when an ad is loaded
+                        //Toast.makeText(activity, "Interstitial Ad is Loaded", Toast.LENGTH_LONG).show();
+
+                        ((DaysSpecialScreen) activity).showInterstitialAd();
+
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(LoadAdError adError) {
+                        Log.e("loadFail", "error-" + adError);
+                        if (mView != null)
+                            mView.dismiss();
+                        // Showing a simple Toast message to user when and ad is failed to load
+
+
+                        intent = new Intent(activity, DaysSpecialDescription.class);
+                        intent.putExtra("title", daysList.getTitle());
+                        intent.putExtra("subtitle", daysList.getSubtitle());
+                        intent.putExtra("description", daysList.getDescription());
+                        intent.putExtra("image", daysList.getImage());
+                        activity.startActivity(intent);
+
+
+
+
+                    }
+
+                    @Override
+                    public void onAdOpened() {
+                        // Showing a simple Toast message to user when an ad opens and overlay and covers the device screen
+                        //Toast.makeText(activity, "Interstitial Ad Opened", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onAdClicked() {
+                        // Showing a simple Toast message to user when a user clicked the ad
+                        //Toast.makeText(activity, "Interstitial Ad Clicked", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onAdLeftApplication() {
+                        // Showing a simple Toast message to user when the user left the application
+                        //Toast.makeText(activity, "Interstitial Ad Left the Application", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onAdClosed() {
+                        //loading new interstitialAd when the ad is closed
+                        // ((NewsCircularScreen) activity).loadInterstitialAd();
+                        // Showing a simple Toast message to user when the user interacted with ad and got the other app and then return to the app again
+                        //mView.show(activity.getSupportFragmentManager(), "load");
+                        //Toast.makeText(activity, "Interstitial Ad is Closed", Toast.LENGTH_LONG).show();
+                        if (mView != null)
+                            mView.dismiss();
+                        intent = new Intent(activity, DaysSpecialDescription.class);
+                        intent.putExtra("title", daysList.getTitle());
+                        intent.putExtra("subtitle", daysList.getSubtitle());
+                        intent.putExtra("description", daysList.getDescription());
+                        intent.putExtra("image", daysList.getImage());
+                        activity.startActivity(intent);
+
+                        //Toast.makeText(activity, ""+newsList.getNewsCircularId(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
         });
 

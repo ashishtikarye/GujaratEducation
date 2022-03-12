@@ -38,11 +38,6 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
@@ -76,8 +71,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -88,7 +81,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     private static int NUM_PAGES = 0;
     private static int currentPage = 0;
     private final ArrayList<Slider> listArrSlider = new ArrayList<Slider>();
-   // public InterstitialAd interstitialAd;
+    // public InterstitialAd interstitialAd;
     ReviewManager mReviewManager;
     ReviewInfo mReviewInfo;
     LinearLayout mLlFacebook, mLlGoogleplus;
@@ -171,7 +164,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         });
         //mAppUpdateManager.registerListener(installStateUpdatedListener);
 
-
         //==============================  GET DEVICE OS =================================//
         device_os = "Android";
         //==============================  GET OS VERSTION =================================//
@@ -202,13 +194,6 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 "\ndevicUUID-" + devicUUID +
                         " firebase_token-" + firebase_token + "\ndevice_model-" + device_model +
                         "\ndevice_osversion-" + device_osversion + "\ndevice_os-" + device_os);
-
-
-
-
-
-
-
 
 
         intent = getIntent();
@@ -245,7 +230,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
         MobileAds.setRequestConfiguration(configuration);
 */
-      //  loadInterstitialAd();
+        //  loadInterstitialAd();
         /*Log.e("HomeScreen", "UserId->" + mFunction.getPrefUserId() + " MediumId->" + mFunction.getPrefMediumId() +
                 "\nUserName->" + mFunction.getPrefUserName() +
                 " Role->" + mFunction.getPrefRole());*/
@@ -270,6 +255,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         mLlDonation = findViewById(R.id.llDonation);
         mTvUsername.setText("Hi " + mFunction.getPrefUserName());
 
+
+
+
         /*if (mFunction.getPrefRole().equalsIgnoreCase("T")) {
             mLlMyGroup.setVisibility(View.VISIBLE);
         }*/
@@ -288,7 +276,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
         if (flag == 1) {
             if (Functions.knowInternetOn(this)) {
-                APIs.getPopup(this, this, mFunction.getPrefMediumId(),device_model, device_os, devicUUID, device_osversion,
+                APIs.getPopup(this, this, mFunction.getPrefMediumId(), device_model, device_os, devicUUID, device_osversion,
                         firebase_token);
             } else {
                 Functions.showInternetAlert(this);
@@ -444,6 +432,15 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         btnEducationCorner = findViewById(R.id.card_eduucation_corner);
         btnCalender = findViewById(R.id.card_calender);
 
+
+        //Log.e("HomScr", "getPrefMediumId----" + mFunction.getPrefMediumId());
+        if (mFunction.getPrefMediumId() == 5) {
+            btnComptExams.setVisibility(View.GONE);
+        } else if (mFunction.getPrefMediumId() == 6) {
+            btnComptExams.setVisibility(View.GONE);
+        } else if (mFunction.getPrefMediumId() == 7) {
+            btnComptExams.setVisibility(View.GONE);
+        }
         btnlanguage_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -677,33 +674,33 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         exitApp();
     }
 
-  /*  public void showInterstitialAd() {
-        if (interstitialAd.isLoaded()) {
-            //showing the ad Interstitial Ad if it is loaded
-            interstitialAd.show();
+    /*  public void showInterstitialAd() {
+          if (interstitialAd.isLoaded()) {
+              //showing the ad Interstitial Ad if it is loaded
+              interstitialAd.show();
 
-            // Showing a simple Toast message to user when an Interstitial ad is shown to the user
-            Toast.makeText(HomeScreen.this, "Interstitial is loaded and showing ad  ", Toast.LENGTH_LONG).show();
-        } else {
-            //Load the Interstitial ad if it is not loaded
-            loadInterstitialAd();
+              // Showing a simple Toast message to user when an Interstitial ad is shown to the user
+              Toast.makeText(HomeScreen.this, "Interstitial is loaded and showing ad  ", Toast.LENGTH_LONG).show();
+          } else {
+              //Load the Interstitial ad if it is not loaded
+              loadInterstitialAd();
 
-            // Showing a simple Toast message to user when an ad is not loaded
-            Toast.makeText(HomeScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_LONG).show();
-        }
-    }
+              // Showing a simple Toast message to user when an ad is not loaded
+              Toast.makeText(HomeScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_LONG).show();
+          }
+      }
 
-    public void loadInterstitialAd() {
-        // Creating  a Ad Request
-        AdRequest adRequest = new AdRequest.Builder().build();
-        // load Ad with the Request
-        interstitialAd.loadAd(adRequest);
-        adRequest.isTestDevice(HomeScreen.this);
+      public void loadInterstitialAd() {
+          // Creating  a Ad Request
+          AdRequest adRequest = new AdRequest.Builder().build();
+          // load Ad with the Request
+          interstitialAd.loadAd(adRequest);
+          adRequest.isTestDevice(HomeScreen.this);
 
-        // Showing a simple Toast message to user when an ad is Loading
-        Toast.makeText(HomeScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
-    }
-*/
+          // Showing a simple Toast message to user when an ad is Loading
+          Toast.makeText(HomeScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
+      }
+  */
     public void CheckVersion() {
         try {
             //String[] v1 = "2.1.9".split("\\.");

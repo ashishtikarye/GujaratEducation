@@ -1,4 +1,5 @@
 C:\Users\7080.old\AppData\Local\Android\Sdk\platform-tools>adb devices
+C:\Users\Ashish.tb\AppData\Local\Android\Sdk\platform-tools>adb devices
 E:\sdk\platform-tools>adb devices
 adb tcpip 5555
 disconnect usb cable
@@ -8,3 +9,6 @@ adb connect 192.168.0.100
 
 "C:\Users\7080.old\AppData\Local\Android\Sdk\tools\bin\uiautomatorviewer.bat"
 
+if (adapter instanceof IconPagerAdapter) {
+            iconAdapter = (IconPagerAdapter) adapter;
+        }

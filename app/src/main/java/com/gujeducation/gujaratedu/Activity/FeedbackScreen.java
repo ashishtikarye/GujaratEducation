@@ -1,5 +1,7 @@
 package com.gujeducation.gujaratedu.Activity;
 
+import static com.gujeducation.gujaratedu.Helper.Functions.isEmptyEdittext;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -35,10 +36,7 @@ import com.gujeducation.gujaratedu.ServerAPIs.APIs;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.gujeducation.gujaratedu.Helper.Functions.isEmptyEdittext;
 
 
 /**
@@ -113,6 +111,12 @@ public class FeedbackScreen extends AppCompatActivity implements OnResult {
         });
 
         mIvBack = findViewById(R.id.ivback);
+
+        if (Functions.knowInternetOn(this)) {
+            APIs.getMyAccount(FeedbackScreen.this, this, mFunction.getPrefUserId());
+        } else {
+            Functions.showInternetAlert(this);
+        }
 
         /*Log.e("FeedbackScreen", "mediumId-->" + mFunction.getMediumId() +
                 "mediumId_guest-->" + mFunction.getMediumId());*/
@@ -242,6 +246,42 @@ public class FeedbackScreen extends AppCompatActivity implements OnResult {
 
     }
 
+    @Override
+    public void onResult(JSONObject jobjWhole) {
+        try {
+            if (jobjWhole != null) {
+                JSONObject jObj = jobjWhole.optJSONObject(Connection.TAG_DATA);
+                int strStatus = jObj.optInt("success");
+                String strMessage = jObj.optString("message");
+                String strApi = jObj.optString("APIName");
+                Log.e("ApiName->", strApi);
+
+                if (strApi.equalsIgnoreCase("getMyAccount")) {
+                    if (strStatus != 0) {
+                        mEdFullName.setText(jObj.optString("fullname"));
+                        mEdSchoolName.setText(jObj.optString("schoolName"));
+                        mEdMobileNo.setText(jObj.optString("mobile"));
+                        mEdEmailId.setText(jObj.optString("email"));
+                    } else {
+                        Functions.ToastUtility(FeedbackScreen.this, strMessage);
+                    }
+                } else if (strApi.equalsIgnoreCase("feedback")) {
+                    if (strStatus == 1) {
+                        Intent intent = new Intent(FeedbackScreen.this, HomeScreen.class);
+                        startActivity(intent);
+                        finish();
+                        Functions.ToastUtility(FeedbackScreen.this, strMessage);
+                    } else {
+                        Functions.ToastUtility(FeedbackScreen.this, strMessage);
+
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void showFeedback() {
 
@@ -437,25 +477,6 @@ public class FeedbackScreen extends AppCompatActivity implements OnResult {
         });
 
 
-    }
-
-    @Override
-    public void onResult(JSONObject jobjWhole) {
-        Log.e("vjobjWhole", "" + jobjWhole.toString());
-        JSONObject jObj = jobjWhole.optJSONObject(Connection.TAG_DATA);
-        if (jObj != null) {
-            int strStatus = jObj.optInt("success");
-            String strMessage = jObj.optString("message");
-            if (strStatus == 1) {
-                Intent intent = new Intent(FeedbackScreen.this, HomeScreen.class);
-                startActivity(intent);
-                finish();
-                Functions.ToastUtility(FeedbackScreen.this, strMessage);
-            } else {
-                Functions.ToastUtility(FeedbackScreen.this, strMessage);
-
-            }
-        }
     }
 
 

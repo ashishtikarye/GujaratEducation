@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,10 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Adapter.CalenderAdapter;
 import com.gujeducation.gujaratedu.Adapter.CalenderEditionAdapter;
@@ -26,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalenderEditionScreen extends AppCompatActivity implements OnResult {
 
@@ -36,6 +42,7 @@ public class CalenderEditionScreen extends AppCompatActivity implements OnResult
     Functions mFunctions;
     Intent intent;
     int CalenderId=0;
+    public InterstitialAd interstitialAd;
 
     private ArrayList<CalenderEdition> listArrCalenderEd = new ArrayList<CalenderEdition>();
 
@@ -64,6 +71,19 @@ public class CalenderEditionScreen extends AppCompatActivity implements OnResult
         recyclerViewCalender.setHasFixedSize(true);
         recyclerViewCalender.setLayoutManager(mLayoutManager);
 
+        interstitialAd = new InterstitialAd(CalenderEditionScreen.this);
+        //interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        interstitialAd.setAdUnitId("ca-app-pub-6923797063551368/3272831029");
+
+        List<String> testDeviceIds = new ArrayList<String>();
+        testDeviceIds.add("8A898BC8824C996E9320D350D4AF1F10");
+        testDeviceIds.add("FFB848305EE41D5DB1D6C522BFB75BEE");
+        testDeviceIds.add("105122E1816DB58B97D2DF2E357E7A37");
+        testDeviceIds.add("ED6E76F6E947CC1B01B01524B255999E");
+
+        RequestConfiguration configuration =
+                new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+        MobileAds.setRequestConfiguration(configuration);
         if(mFunctions.knowInternetOn(this)){
             APIs.getCalenderEdition(CalenderEditionScreen.this,this,CalenderId);
         }
@@ -127,5 +147,32 @@ public class CalenderEditionScreen extends AppCompatActivity implements OnResult
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void showInterstitialAd() {
+        if (interstitialAd.isLoaded()) {
+            //showing the ad Interstitial Ad if it is loaded
+            interstitialAd.show();
+
+            // Showing a simple Toast message to user when an Interstitial ad is shown to the user
+            Toast.makeText(CalenderEditionScreen.this, "Interstitial is loaded and showing ad  ", Toast.LENGTH_SHORT).show();
+        } else {
+            //Load the Interstitial ad if it is not loaded
+            loadInterstitialAd();
+
+            // Showing a simple Toast message to user when an ad is not loaded
+            //Toast.makeText(CalenderEditionScreen.this, "Interstitial Ad is not Loaded ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void loadInterstitialAd() {
+        // Creating  a Ad Request
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // load Ad with the Request
+        interstitialAd.loadAd(adRequest);
+        adRequest.isTestDevice(CalenderEditionScreen.this);
+
+        // Showing a simple Toast message to user when an ad is Loading
+        //Toast.makeText(CalenderEditionScreen.this, "Interstitial Ad is loading ", Toast.LENGTH_SHORT).show();
     }
 }

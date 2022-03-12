@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="@dimen/_550sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            card_view:cardBackgroundColor="@color/grey2"
+            card_view:cardCornerRadius="@dimen/_5sdp"
+            card_view:cardElevation="@dimen/_5sdp"
+            card_view:cardUseCompatPadding="true">
+
+
+            <LinearLayout
+                android:id="@+id/lvtopbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivclosepost"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_d_close" />
+
+
+                <LinearLayout
+                    android:id="@+id/lveditpost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:clickable="false"
+                        android:background="@color/input_box_line"></View>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tveditpost"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/pop_medium"
+                        android:gravity="center"
+                        android:clickable="false"
+                        android:text="@string/editpost"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lvdeletepost"
+                    android:layout_width="match_parent"
+                    android:clickable="true"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:background="@color/input_box_line"></View>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvdeletepost"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/pop_medium"
+                        android:gravity="center"
+                        android:text="@string/deletepost"
+                        android:clickable="false"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lvreportpost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:background="@color/input_box_line"></View>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvreportpost"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/pop_medium"
+                        android:gravity="center"
+                        android:text="@string/reportpost"
+                        android:textColor="@color/black"
+                        android:clickable="false"
+                        android:textSize="@dimen/_13sdp" />
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center"
+                        android:clickable="false"
+                        android:background="@color/input_box_line"></View>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+

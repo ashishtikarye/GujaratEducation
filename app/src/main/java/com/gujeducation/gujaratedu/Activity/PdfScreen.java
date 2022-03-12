@@ -1,9 +1,11 @@
 package com.gujeducation.gujaratedu.Activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.downloader.Error;
 import com.downloader.OnCancelListener;
@@ -26,7 +31,6 @@ import com.downloader.Progress;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Helper.DownloadTask;
 
@@ -44,7 +48,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
     };
     AppCompatActivity activity;
     AppCompatImageView mIvBack, mIvDownload, mIvShare;
-    String PDF, Name;
+    String PDF, Name, replaceDotChapterName;
     AppCompatTextView mTvHeader;
     String urlPdf = "";
     ProgressDialog pbDialog;
@@ -53,7 +57,43 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
     Intent intent;
     AdView mAdView;
     //public InterstitialAd interstitialAd;
+    boolean isTrue = false;
 
+
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+
+            Log.e("vrfystorg", "ELSEprmisngrntd");
+
+        } else {
+            Log.e("vrfystorg", "IFprmisngrntd");
+
+        }
+    }
+    public void checkPermissionReadStorage(Context context, Activity activity) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Log.e("chkprmsn", "IFCLICK");
+            } else {
+                Log.e("chkprmsn", "ELSECLICK");
+
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_WRITE_STORAGE);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,21 +101,26 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_pdfviewer);
 
         activity = PdfScreen.this;
-
+        checkPermissionReadStorage(this, this);
+        verifyStoragePermissions(this);
         intent = getIntent();
         try {
 
-            /*Log.e("PdfGetIntent", "PDF-->" + intent.getExtras().getString("PDF") +
-                    " ChapterName-->" +  intent.getExtras().getString("Name"));*/
+            Log.e("PdfScreenIntent", "PDF-->" + intent.getExtras().getString("PDF") +
+                    "\n ChapterName-->" + intent.getExtras().getString("Name"));
 
             if (!(intent.getExtras().getString("Name").isEmpty() && intent.getExtras().getString("PDF").isEmpty())) {
                 //Name = intent.getExtras().getString("Name").replace(".", "");
                 Name = intent.getExtras().getString("Name");
                 PDF = intent.getExtras().getString("PDF");
+                Log.e("Name", "<==>" + Name);
+                Name = Name.replace(".", "");
             }
         } catch (Exception e) {
             Log.e("Null Object exception", "Name");
         }
+
+
         /*try {
             if(!(intent.getExtras().getString("worksheetName").isEmpty() && intent.getExtras().getString("worksheetPDF").isEmpty())) {
                 Name = intent.getExtras().getString("worksheetName").replace(".", "");
@@ -99,6 +144,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         mIvBack = findViewById(R.id.ivbackbt);
         mTvHeader = findViewById(R.id.header_title);
         mIvDownload = findViewById(R.id.ivdownnload);
+        mIvDownload.setVisibility(View.GONE);
         mIvShare = findViewById(R.id.iv_share);
         //Log.e("PdfScreenClass", "PDF-->" + PDF + " ChapterName-->" + Name);
         mTvHeader.setText(Name);
@@ -106,8 +152,17 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         mIvBack.setOnClickListener(this);
         mIvDownload.setOnClickListener(this);
         mIvShare.setOnClickListener(this);
-        //Log.e("startDownloadFromNet", "vPDF->" + PDF + " Name->" + Name);
-        startDownloadFromNet(PDF, Name);
+        Log.e("startDownloadFromNet", "vPDF->" + PDF + "\nName->" + Name);
+
+        if (isTrue) {
+            Log.e("ChapterPDF", "-->" + PDF);
+            startDownloadFromNet(PDF, Name);
+        } else {
+            Log.e("pdf", "sampleee.pdf");
+            startDownloadFromNet(PDF, Name);
+        }
+
+    //    startDownloadFromNet(PDF, Name);
     }
 
     @Override
@@ -117,7 +172,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
     }
 
     private void startDownloadFromNet(String url, String nm) {
-        //Log.e("startDownloadFromNet", "dataurl->" + url + " name->" + nm);
+        Log.e("startDownloadFromNet", "dataurl->" + url + "\n name->" + nm);
 
 
         pbDialog = new ProgressDialog(PdfScreen.this);
@@ -126,25 +181,31 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         pbDialog.setIndeterminate(false);
         pbDialog.setCancelable(false);
         pbDialog.show();
-
+        isTrue = !isTrue;
         final String dirPath = getExternalCacheDir().getAbsolutePath();
-        //Log.e("dirPath",""+dirPath);
+        final String fileName = Name+".pdf";
 
-        //Log.e("nameee",""+Name);
-        //final String fileName = Name + ".pdf";
-        //final String fileName = Name + ".pdf";
-        //Log.e("fileName",""+fileName);
-
-        String path = dirPath + File.separator + Name;
-        //Log.e("path",""+path);
+        Log.e("downloadFromNet", "dirPath-" + dirPath +
+                "\nName-" + fileName);
+        String path = dirPath +File.separator+  fileName;
+        /*if (Name.contains(".")) {
+            path = dirPath + File.separator + replaceDotChapterName;
+            Log.e("path", "if-" + path);
+        } else {
+            path = dirPath + File.separator + Name;
+            Log.e("path", "else-" + path);
+        }*/
+        Log.e("finalPath", "" + path);
 
         file = new File(path);
         if (file.exists()) {
+            Log.e("file already", "exists-" + file);
             loadFromLoacal(path);
             pbDialog.dismiss();
         } else {
             //PRDownloader.download(url, dirPath, fileName)
-            PRDownloader.download(url, dirPath, Name)
+            Log.e("filenotexists", "url-" + url + "\ndirPath-" + dirPath + "\nName-" + fileName);
+            PRDownloader.download(url, dirPath, fileName)
                     .build()
                     .setOnStartOrResumeListener(new OnStartOrResumeListener() {
                         @Override
@@ -178,7 +239,8 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                         public void onDownloadComplete() {
                             //Log.e("PRDownloader", "onDownloadComplete");
                             Toast.makeText(PdfScreen.this, "Scoll down for next page", Toast.LENGTH_SHORT).show();
-                            String path = dirPath + File.separator + Name;//fileName;
+                            String path = dirPath + File.separator + fileName;//Name;//fileName;
+                            Log.e("ListenerLoadloadLoacal-", "path-" + path);
                             loadFromLoacal(path);
                             pbDialog.dismiss();
                             //showInterstitialAd();
@@ -198,7 +260,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         //String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/demopdf.pdf";
         //  File file = new File(path);
         file = new File(path);
-        //Log.e("loadFromLoacal", "file->" + file);
+        Log.e("loadingFromLocal", "file->" + file+"\n path->" + path);
         pdfView.fromFile(file)
                 .enableSwipe(true) // allows to block changing pages using swipe
                 .swipeHorizontal(false)
@@ -207,7 +269,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                 //.enableAnnotationRendering(false) // render annotations (such as comments, colors or forms)
                 //.password(null)
                 .scrollHandle(null)
-               // .enableAntialiasing(true) // improve rendering a little bit on low-res screens
+                // .enableAntialiasing(true) // improve rendering a little bit on low-res screens
                 // spacing between pages in dp. To define spacing color, set view background
                 .spacing(0)
                 //.invalidPageColor(Color.BLUE) // color of page that is invalid and cannot be loaded
@@ -219,17 +281,21 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         try {
             if (view == mIvDownload) {
                 try {
-                    //Log.e("mIvDownloadClick", "ChapterPDF-->" + PDF + "\n urlPdf-->" + urlPdf);
                     String filename = Name + ".pdf";
+                    Log.e("mIvDownloadClick", "file-->" + file + " filename-->" + filename +
+                            "\n getAbsoluteFile-->" + file.getAbsoluteFile() +
+                            "\n fileString-->" + file.toString() +
+                            "\n getNamefile-->" + file.getName());
                     new DownloadTask(PdfScreen.this, file, filename);
-                    Toast.makeText(PdfScreen.this, "Pdf save in internal storage in GujaratEducation folder.", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(PdfScreen.this, "Pdf save in internal storage in GujaratEducation folder.", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 //  new DownloadFromURL().execute(getCatalogFullImage);
             } else if (view == mIvShare) {
-                //Log.e("mIvShare", "pthfile->" + file);
-                /*Intent sendIntent = new Intent();
+                Toast.makeText(PdfScreen.this, "mIvShare Click", Toast.LENGTH_SHORT).show();
+                Log.e("mIvShareClick", "pthfile->" + file);
+                Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 sendIntent.setDataAndType(Uri.fromFile(file), "application/pdf");
@@ -239,15 +305,29 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                                 .getPackageName() + ".provider", file);
                 sendIntent.setDataAndType(apkURI, "application/pdf");
                 sendIntent.putExtra(Intent.EXTRA_STREAM, apkURI);//uri
-                startActivity(Intent.createChooser(sendIntent, "Share Chapter PDF Via!!"));*/
+                startActivity(Intent.createChooser(sendIntent, "Share Chapter PDF Via!!"));
 
-                String filename = Name + ".pdf";
+               /* Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                sendIntent.setDataAndType(Uri.fromFile(file), "application/pdf");
+                Uri apkURI = FileProvider.getUriForFile(
+                        getApplicationContext(),
+                        getApplicationContext().getApplicationContext()
+                                .getPackageName() + ".provider", file);
+                sendIntent.setDataAndType(apkURI, "application/pdf");
+                sendIntent.putExtra(Intent.EXTRA_STREAM, apkURI);//uri
+                startActivity(Intent.createChooser(sendIntent, "Share Chapter PDF Via!!"));
+
+                Log.e("mIvShare", "pthfile->" + file);
+
+
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                 intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                startActivity(Intent.createChooser(intent, "Share Chapter PDF Via!!"));
+                startActivity(Intent.createChooser(intent, "Share Chapter PDF Via!!"));*/
 
 
 

@@ -74,7 +74,7 @@ public class NewsCircularAdapter extends RecyclerView.Adapter<NewsCircularAdapte
                     public void onAdLoaded() {
 
                         // Showing a simple Toast message to user when an ad is loaded
-                        Toast.makeText(activity, "Interstitial Ad is Loaded", Toast.LENGTH_LONG).show();
+                     //   Toast.makeText(activity, "Interstitial Ad is Loaded", Toast.LENGTH_LONG).show();
 
                         ((NewsCircularScreen) activity).showInterstitialAd();
 
@@ -86,7 +86,7 @@ public class NewsCircularAdapter extends RecyclerView.Adapter<NewsCircularAdapte
                         if (mView != null)
                             mView.dismiss();
                         // Showing a simple Toast message to user when and ad is failed to load
-                        Toast.makeText(activity, "Interstitial Ad Failed to Load ", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(activity, "Interstitial Ad Failed to Load ", Toast.LENGTH_LONG).show();
                         intent = new Intent(activity, PdfScreen.class);
                         intent.putExtra("Name", newsList.getTitle());
                         intent.putExtra("PDF", newsList.getImage());
@@ -96,19 +96,19 @@ public class NewsCircularAdapter extends RecyclerView.Adapter<NewsCircularAdapte
                     @Override
                     public void onAdOpened() {
                         // Showing a simple Toast message to user when an ad opens and overlay and covers the device screen
-                        Toast.makeText(activity, "Interstitial Ad Opened", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(activity, "Interstitial Ad Opened", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onAdClicked() {
                         // Showing a simple Toast message to user when a user clicked the ad
-                        Toast.makeText(activity, "Interstitial Ad Clicked", Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(activity, "Interstitial Ad Clicked", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onAdLeftApplication() {
                         // Showing a simple Toast message to user when the user left the application
-                        Toast.makeText(activity, "Interstitial Ad Left the Application", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(activity, "Interstitial Ad Left the Application", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -117,7 +117,7 @@ public class NewsCircularAdapter extends RecyclerView.Adapter<NewsCircularAdapte
                        // ((NewsCircularScreen) activity).loadInterstitialAd();
                         // Showing a simple Toast message to user when the user interacted with ad and got the other app and then return to the app again
                         //mView.show(activity.getSupportFragmentManager(), "load");
-                        Toast.makeText(activity, "Interstitial Ad is Closed", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(activity, "Interstitial Ad is Closed", Toast.LENGTH_LONG).show();
                         if (mView != null)
                             mView.dismiss();
                         intent = new Intent(activity, PdfScreen.class);

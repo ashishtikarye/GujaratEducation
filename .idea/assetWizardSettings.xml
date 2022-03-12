@@ -307,7 +307,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../../AppData/Local/Android/Sdk/icons/material/materialicons/notifications_none/baseline_notifications_none_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/thumb_up_alt/baseline_thumb_up_alt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -317,9 +317,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_notification" />
-                            <entry key="sourceFile" value="C:\Users\7080\Downloads\terms.svg" />
+                            <entry key="outputName" value="ic_like" />
+                            <entry key="sourceFile" value="C:\Users\Ashish.tb\Downloads\likeshareedit\edit-round-line.svg" />
                           </map>
                         </option>
                       </PersistentState>

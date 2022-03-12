@@ -1,7 +1,6 @@
 package com.gujeducation.gujaratedu.Adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gujeducation.R;
 import com.gujeducation.gujaratedu.Activity.ChapterScreen;
 import com.gujeducation.gujaratedu.Activity.EssayListScreen;
+import com.gujeducation.gujaratedu.Activity.EvalutionScreen;
 import com.gujeducation.gujaratedu.Activity.PdfScreen;
-import com.gujeducation.gujaratedu.Activity.PrePrimaryTextScreen;
 import com.gujeducation.gujaratedu.Activity.SubjectOldPaperListScreen;
 import com.gujeducation.gujaratedu.Helper.Connection;
 import com.gujeducation.gujaratedu.Helper.Functions;
@@ -119,6 +118,20 @@ public class SubOptionAdapter extends RecyclerView.Adapter<SubOptionAdapter.MyVi
                         } else
                             Functions.showInternetAlert(activity);
                     }
+
+
+                    if (subList.getOptinonName().equalsIgnoreCase("Evalution")) {
+                        if (Functions.knowInternetOn(activity)) {
+                            //((ChapterScreen)activity).showInterstitialAd();
+                            intent = new Intent(activity, EvalutionScreen.class);
+                            intent = intent.putExtra("optionType","Evalution");
+                            intent = intent.putExtra("subjectId",mFunction.getSubjectId());
+                            activity.startActivity(intent);
+                        } else
+                            Functions.showInternetAlert(activity);
+                    }
+
+
                 }
             });
         } catch (Exception e) {

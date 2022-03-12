@@ -285,7 +285,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_weight="0.5"
                         android:orientation="vertical">
 
@@ -298,18 +298,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/app_name"
-                                android:src="@drawable/ic_phone"
-                                android:tint="@color/login_image_bg" />
+                                android:src="@drawable/ic_district"
+                                android:tint="@color/input_box_line" />
 
                             <EditText
-                                android:id="@+id/edtaluka"
+                                android:id="@+id/eddistict"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:background="#00000000"
+                                android:clickable="true"
+                                android:cursorVisible="false"
+                                android:focusable="false"
                                 android:fontFamily="@font/pop_regular"
-                                android:hint="@string/taluka"
+                                android:hint="@string/distict"
                                 android:inputType="text"
                                 android:singleLine="true"
                                 android:textColor="@color/login_edit_text"
@@ -325,11 +328,10 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
                         android:layout_weight="0.5"
                         android:orientation="vertical">
 
@@ -342,18 +344,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:contentDescription="@string/app_name"
-                                android:src="@drawable/ic_user"
-                                android:tint="@color/login_image_bg" />
+                                android:src="@drawable/ic_taluka"
+                                android:tint="@color/input_box_line" />
 
                             <EditText
-                                android:id="@+id/eddistict"
+                                android:id="@+id/edtaluka"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:background="#00000000"
+                                android:clickable="true"
+                                android:cursorVisible="false"
+                                android:focusable="false"
                                 android:fontFamily="@font/pop_regular"
-                                android:hint="@string/distict"
+                                android:hint="@string/taluka"
                                 android:inputType="text"
                                 android:singleLine="true"
                                 android:textColor="@color/login_edit_text"
