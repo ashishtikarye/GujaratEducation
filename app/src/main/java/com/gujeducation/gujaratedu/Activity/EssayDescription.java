@@ -45,7 +45,7 @@ public class EssayDescription extends AppCompatActivity {
             eBody = "Unknown";
         }
 
-        Log.e("ebody",""+eBody);
+        //Log.e("ebody",""+eBody);
 
         try {
             mTvTitle.setText(eTitle);

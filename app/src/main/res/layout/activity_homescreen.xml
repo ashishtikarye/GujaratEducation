@@ -1019,7 +1019,7 @@
                             android:layout_alignParentBottom="true"
                             android:layout_centerInParent="true"
                             android:layout_margin="@dimen/_5sdp"
-                            android:text="v1.4"
+                            android:text="v1.6"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
                     </RelativeLayout>

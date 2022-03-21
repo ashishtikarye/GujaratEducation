@@ -87,7 +87,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
         try {
-            Log.e("SDK_INT_VERSION", "--" + Build.VERSION.SDK_INT);
+          //  Log.e("SDK_INT_VERSION", "--" + Build.VERSION.SDK_INT);
             Dexter.withContext(this)
                     .withPermissions(
                             Manifest.permission.READ_EXTERNAL_STORAGE,

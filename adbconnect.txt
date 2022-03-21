@@ -3,7 +3,7 @@ C:\Users\Ashish.tb\AppData\Local\Android\Sdk\platform-tools>adb devices
 E:\sdk\platform-tools>adb devices
 adb tcpip 5555
 disconnect usb cable
-adb connect 192.168.0.100
+adb connect 192.168.0.105
 
 ((MainActivity)getActivity()).startChronometer();
 

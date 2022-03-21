@@ -57,7 +57,7 @@ public class PaperExamListDetailsScreen extends AppCompatActivity implements OnR
             exam_name = "";
         }
 
-        Log.e("ppr_exam_id","->"+exam_id);
+        //Log.e("ppr_exam_id","->"+exam_id);
         mTvTitle = (AppCompatTextView) findViewById(R.id.header_title);
         btnBack = (AppCompatImageView) findViewById(R.id.ivback);
         mLvPapers = (LinearLayout) findViewById(R.id.lvPapers);

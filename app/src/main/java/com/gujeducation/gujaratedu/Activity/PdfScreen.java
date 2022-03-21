@@ -6,9 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
 import com.downloader.Progress;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnTapListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.gujeducation.R;
@@ -72,7 +75,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                     REQUEST_EXTERNAL_STORAGE
             );
 
-            Log.e("vrfystorg", "ELSEprmisngrntd");
+          //  Log.e("vrfystorg", "ELSEprmisngrntd");
 
         } else {
             Log.e("vrfystorg", "IFprmisngrntd");
@@ -113,7 +116,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                 //Name = intent.getExtras().getString("Name").replace(".", "");
                 Name = intent.getExtras().getString("Name");
                 PDF = intent.getExtras().getString("PDF");
-                Log.e("Name", "<==>" + Name);
+               // Log.e("Name", "<==>" + Name);
                 Name = Name.replace(".", "");
             }
         } catch (Exception e) {
@@ -152,13 +155,13 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         mIvBack.setOnClickListener(this);
         mIvDownload.setOnClickListener(this);
         mIvShare.setOnClickListener(this);
-        Log.e("startDownloadFromNet", "vPDF->" + PDF + "\nName->" + Name);
+      //  Log.e("startDownloadFromNet", "vPDF->" + PDF + "\nName->" + Name);
 
         if (isTrue) {
-            Log.e("ChapterPDF", "-->" + PDF);
+         //   Log.e("ChapterPDF", "-->" + PDF);
             startDownloadFromNet(PDF, Name);
         } else {
-            Log.e("pdf", "sampleee.pdf");
+            //Log.e("pdf", "sampleee.pdf");
             startDownloadFromNet(PDF, Name);
         }
 
@@ -172,7 +175,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
     }
 
     private void startDownloadFromNet(String url, String nm) {
-        Log.e("startDownloadFromNet", "dataurl->" + url + "\n name->" + nm);
+       // Log.e("startDownloadFromNet", "dataurl->" + url + "\n name->" + nm);
 
 
         pbDialog = new ProgressDialog(PdfScreen.this);
@@ -185,8 +188,8 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         final String dirPath = getExternalCacheDir().getAbsolutePath();
         final String fileName = Name+".pdf";
 
-        Log.e("downloadFromNet", "dirPath-" + dirPath +
-                "\nName-" + fileName);
+        /*Log.e("downloadFromNet", "dirPath-" + dirPath +
+                "\nName-" + fileName);*/
         String path = dirPath +File.separator+  fileName;
         /*if (Name.contains(".")) {
             path = dirPath + File.separator + replaceDotChapterName;
@@ -195,16 +198,16 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
             path = dirPath + File.separator + Name;
             Log.e("path", "else-" + path);
         }*/
-        Log.e("finalPath", "" + path);
+//        Log.e("finalPath", "" + path);
 
         file = new File(path);
         if (file.exists()) {
-            Log.e("file already", "exists-" + file);
+          //  Log.e("file already", "exists-" + file);
             loadFromLoacal(path);
             pbDialog.dismiss();
         } else {
             //PRDownloader.download(url, dirPath, fileName)
-            Log.e("filenotexists", "url-" + url + "\ndirPath-" + dirPath + "\nName-" + fileName);
+            //Log.e("filenotexists", "url-" + url + "\ndirPath-" + dirPath + "\nName-" + fileName);
             PRDownloader.download(url, dirPath, fileName)
                     .build()
                     .setOnStartOrResumeListener(new OnStartOrResumeListener() {
@@ -240,7 +243,7 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                             //Log.e("PRDownloader", "onDownloadComplete");
                             Toast.makeText(PdfScreen.this, "Scoll down for next page", Toast.LENGTH_SHORT).show();
                             String path = dirPath + File.separator + fileName;//Name;//fileName;
-                            Log.e("ListenerLoadloadLoacal-", "path-" + path);
+                          //  Log.e("ListenerLoadloadLoacal-", "path-" + path);
                             loadFromLoacal(path);
                             pbDialog.dismiss();
                             //showInterstitialAd();
@@ -248,8 +251,8 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
 
                         @Override
                         public void onError(Error error) {
-                            Log.e("PRDownloader_er1", "======== 1121212212 ====" + error.getConnectionException().getMessage());
-                            Log.e("PRDownloader_er2", "======== 1121212212 ====" + error.getResponseCode());
+                         //   Log.e("PRDownloader_er1", "======== 1121212212 ====" + error.getConnectionException().getMessage());
+                            Log.e("PRDownloader_er2", "" + error.getResponseCode());
                         }
                     });
         }
@@ -260,16 +263,24 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
         //String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/demopdf.pdf";
         //  File file = new File(path);
         file = new File(path);
-        Log.e("loadingFromLocal", "file->" + file+"\n path->" + path);
+       // Log.e("loadingFromLocal", "file->" + file+"\n path->" + path);
         pdfView.fromFile(file)
                 .enableSwipe(true) // allows to block changing pages using swipe
                 .swipeHorizontal(false)
-                .enableDoubletap(true)
+                .enableDoubletap(false)
                 .defaultPage(0)
-                //.enableAnnotationRendering(false) // render annotations (such as comments, colors or forms)
-                //.password(null)
+                .enableAnnotationRendering(false) // render annotations (such as comments, colors or forms)
+                .password(null)
                 .scrollHandle(null)
-                // .enableAntialiasing(true) // improve rendering a little bit on low-res screens
+                /*.onTap(new OnTapListener() {
+                    @Override
+                    public boolean onTap(MotionEvent e) {
+                        Log.e("onTap","Click-"+e);
+                        Toast.makeText(getApplicationContext(), "onTap", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })*/
+                 .enableAntialiasing(true) // improve rendering a little bit on low-res screens
                 // spacing between pages in dp. To define spacing color, set view background
                 .spacing(0)
                 //.invalidPageColor(Color.BLUE) // color of page that is invalid and cannot be loaded
@@ -282,10 +293,10 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
             if (view == mIvDownload) {
                 try {
                     String filename = Name + ".pdf";
-                    Log.e("mIvDownloadClick", "file-->" + file + " filename-->" + filename +
+                    /*Log.e("mIvDownloadClick", "file-->" + file + " filename-->" + filename +
                             "\n getAbsoluteFile-->" + file.getAbsoluteFile() +
                             "\n fileString-->" + file.toString() +
-                            "\n getNamefile-->" + file.getName());
+                            "\n getNamefile-->" + file.getName());*/
                     new DownloadTask(PdfScreen.this, file, filename);
                     // Toast.makeText(PdfScreen.this, "Pdf save in internal storage in GujaratEducation folder.", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -293,8 +304,8 @@ public class PdfScreen extends AppCompatActivity implements View.OnClickListener
                 }
                 //  new DownloadFromURL().execute(getCatalogFullImage);
             } else if (view == mIvShare) {
-                Toast.makeText(PdfScreen.this, "mIvShare Click", Toast.LENGTH_SHORT).show();
-                Log.e("mIvShareClick", "pthfile->" + file);
+                //Toast.makeText(PdfScreen.this, "mIvShare Click", Toast.LENGTH_SHORT).show();
+                //Log.e("mIvShareClick", "pthfile->" + file);
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

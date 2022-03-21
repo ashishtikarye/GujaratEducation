@@ -111,16 +111,16 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        Log.e("EducationCornerScreen", "UserId->" + mFunctions.getPrefUserId() + " MediumId->" + mFunctions.getPrefMediumId() +
+        /*Log.e("EducationCornerScreen", "UserId->" + mFunctions.getPrefUserId() + " MediumId->" + mFunctions.getPrefMediumId() +
                 "\nUserName->" + mFunctions.getPrefUserName() +
-                " Role->" + mFunctions.getPrefRole());
+                " Role->" + mFunctions.getPrefRole());*/
 
 
-        Log.e("PREFGET-",
+        /*Log.e("PREFGET-",
                 "userId-" + mFunctions.getPrefUserId() +
                         "fullName-" + mFunctions.getPrefUserName() +
                         "role-" + mFunctions.getPrefRole() +
-                        "image-" + mFunctions.getPrefUserImage());
+                        "image-" + mFunctions.getPrefUserImage());*/
 
         btnCreatePost = findViewById(R.id.btn_create_post);
         mIvBack = findViewById(R.id.ivback);
@@ -162,7 +162,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
     public void CallDoLike(int postId) {
         try {
-            Log.e("api", "Like-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
+            //Log.e("api", "Like-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
             APIs.doLikePost(this, this, mFunctions.getPrefUserId(), postId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,7 +171,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
 
     public void CallDoDisLike(int postId) {
         try {
-            Log.e("api", "DisLike-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
+          //  Log.e("api", "DisLike-UserId-" + mFunctions.getPrefUserId() + " postId-" + postId);
             APIs.doDislikePost(this, this, mFunctions.getPrefUserId(), postId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -244,7 +244,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         } else {
             myPostId = postId;
             isUpdate = true;
-            Log.e("myPostId1", "" + myPostId);
+          //  Log.e("myPostId1", "" + myPostId);
             mTvCreatePost.setText("Update Post");
             edtPostTitle.setText(title);
             if (!youtubeLink.equalsIgnoreCase("NA")) {
@@ -261,7 +261,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
                 showPdfLayout.setVisibility(View.GONE);
 
                 try {
-                    Log.e("serverImage", "-->" + mFunctions.getPrefUserImage());
+              //      Log.e("serverImage", "-->" + mFunctions.getPrefUserImage());
                     Glide.with(this).load(image)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .priority(Priority.HIGH).dontAnimate()
@@ -275,7 +275,7 @@ public class EducationCornerScreen extends AppCompatActivity implements OnResult
         }
 
         try {
-            Log.e("userImage", "-->" + mFunctions.getPrefUserImage());
+          //  Log.e("userImage", "-->" + mFunctions.getPrefUserImage());
             Glide.with(this).load(mFunctions.getPrefUserImage())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .priority(Priority.HIGH).dontAnimate()

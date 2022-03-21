@@ -89,11 +89,11 @@ public class ImagePickAdapter extends BaseAdapter<ImageFile, ImagePickAdapter.Im
                     File file = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DCIM).getAbsolutePath()
                             + "/IMG_" + timeStamp + ".jpg");
                     mImagePath = file.getAbsolutePath();
-                    Log.e("mImagePath","-->"+mImagePath);
+                    //Log.e("mImagePath","-->"+mImagePath);
                     ContentValues contentValues = new ContentValues(1);
                     contentValues.put(MediaStore.Images.Media.DATA, mImagePath);
                     mImageUri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
-                    Log.e("mImageUri","-->"+mImageUri);
+                    //Log.e("mImageUri","-->"+mImageUri);
 
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                     if (Util.detectIntent(mContext, intent)) {

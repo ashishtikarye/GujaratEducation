@@ -96,10 +96,10 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
                         Settings.Secure.ANDROID_ID);
             }
         }
-        Log.e("notificationS", /*"android_id-" + android_id +*/
+        /*Log.e("notificationS", *//*"android_id-" + android_id +*//*
                 "\ndevicUUID-" + devicUUID +
                 " firebase_token-" + firebase_token + "\ndevice_model-" + device_model +
-                "\ndevice_osversion-" + device_osversion + "\ndevice_os-" + device_os);
+                "\ndevice_osversion-" + device_osversion + "\ndevice_os-" + device_os);*/
 
         Intent intent = getIntent();
         if (intent.hasExtra("loginType")) {
@@ -108,7 +108,7 @@ public class SignInScreen extends AppCompatActivity implements GoogleApiClient.O
             strLoginType = "Unknown";
         }
 
-        Log.e("strLoginType", " -->" + strLoginType);
+        //Log.e("strLoginType", " -->" + strLoginType);
 
 
         //SignInButton signInButton = findViewById(R.id.sign_in_button);

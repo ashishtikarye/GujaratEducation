@@ -91,7 +91,7 @@ public class ChapterScreen extends AppCompatActivity implements OnResult {
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
         btnMoreInfo = findViewById(R.id.btnstartquiz);
 
-        Log.e("getStandardIdentify", "--->" + mFunctions.getStandardIdentify());
+        //Log.e("getStandardIdentify", "--->" + mFunctions.getStandardIdentify());
         if (mFunctions.getStandardIdentify() == 1) {
             btnMoreInfo.setText(R.string.Pri_primary_quize);
         } else {
@@ -114,11 +114,11 @@ public class ChapterScreen extends AppCompatActivity implements OnResult {
             strGcrtImg = "";
         }
 
-        Log.e("ChapterIntent", " subject->" + subject +
+        /*Log.e("ChapterIntent", " subject->" + subject +
                 " strMadeBy->" + strMadeBy +
                 " strCreditLicence->" + strCreditLicence +
                 " strGcrtImg->" + strGcrtImg
-        );
+        );*/
 
         // mTvMadeBy.setText(strMadeBy);
         //mTvCreditorLisence.setText("Licence By : "+strCreditLicence);
@@ -206,11 +206,11 @@ public class ChapterScreen extends AppCompatActivity implements OnResult {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        Log.e("Menu", "onPrepareOptionsMenu");
+        //Log.e("Menu", "onPrepareOptionsMenu");
         menu.clear();
         if (listArrSubjectMenu.size() != 0) {
             for (int i = 0; i < listArrSubjectMenu.size(); i++) {
-                Log.e("Menu", "onPrepareOptionsMenuInsideFor");
+                //Log.e("Menu", "onPrepareOptionsMenuInsideFor");
                 SubjectOptionMenu optionMenu = listArrSubjectMenu.get(i);
                 menu.add(0, optionMenu.getMenuId(), Menu.NONE, optionMenu.getMenuName());
             }
@@ -228,8 +228,8 @@ public class ChapterScreen extends AppCompatActivity implements OnResult {
                 Toast.makeText(this, "" + item.getItemId(), Toast.LENGTH_SHORT).show();
                 intent = new Intent(ChapterScreen.this, PdfScreen.class);
                 SubjectOptionMenu optionMenu = listArrSubjectMenu.get((item.getItemId() - 1));
-                Log.e("getMenuName", "=======>" + dateFormat.format(date) + "_" + optionMenu.getMenuName());
-                Log.e("getPdfName", "=======>" + optionMenu.getPdfName());
+                //Log.e("getMenuName", "=======>" + dateFormat.format(date) + "_" + optionMenu.getMenuName());
+                //Log.e("getPdfName", "=======>" + optionMenu.getPdfName());
                 intent.putExtra("Name", dateFormat.format(date) + "_" + optionMenu.getMenuName());
                 intent.putExtra("PDF", optionMenu.getPdfName());
                 startActivity(intent);
